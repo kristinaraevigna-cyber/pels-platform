@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import type { AssessmentData } from "@/lib/types";
-import { PELS_ITEMS, LIKERT_LABELS, scorePELS } from "@/lib/pels-data";
+import { PELS_ITEMS, scorePELS } from "@/lib/pels-data";
 import { PERMA_SUBSCALES, scorePerma } from "@/lib/perma-data";
 
 interface AssessmentPageProps {
@@ -37,7 +37,7 @@ export default function AssessmentPage({
   };
 
   const handleSubmit = async () => {
-    alert("Submit clicked — function is running");
+    if (submitting) return;
 
     if (!allAnswered) {
       setShowValidation(true);
@@ -55,12 +55,9 @@ export default function AssessmentPage({
     setError(null);
 
     try {
-      console.log("[PELS Submit] Starting submission...");
-
       const score = scorePELS(responses);
-      console.log("[PELS Submit] Score calculated:", score);
 
-      // Build the assessment record
+      // Build the assessment record — pure data, no Supabase client calls
       const record: Record<string, unknown> = {
         respondent_name: data.respondent_name,
         respondent_email: data.respondent_email,
@@ -83,31 +80,23 @@ export default function AssessmentPage({
         consent_given: true,
       };
 
-      // Add individual PELS item responses
       PELS_ITEMS.forEach((item) => {
         record[`pels_${item.id}`] = responses[item.id];
       });
 
-      // Add PERMA+4 responses and computed scores
       const permaResponses = data.perma_responses || {};
-      const permaCount = Object.keys(permaResponses).length;
-      console.log("[PELS Submit] PERMA responses count:", permaCount);
-
       for (let i = 1; i <= 29; i++) {
         record[`perma_${i}`] = permaResponses[i] || null;
       }
-      if (permaCount === 29) {
+      if (Object.keys(permaResponses).length === 29) {
         const permaScore = scorePerma(permaResponses);
-        console.log("[PELS Submit] PERMA score calculated:", permaScore);
         PERMA_SUBSCALES.forEach((sub) => {
           record[`perma_${sub.key.toLowerCase()}_mean`] = permaScore.subscaleScores[sub.key];
         });
         record.perma_overall_mean = permaScore.totalMean;
       }
 
-      console.log("[PELS Submit] Record keys (" + Object.keys(record).length + "):", Object.keys(record));
-      console.log("[PELS Submit] Saving via API route...");
-
+      // Save via server-side API route (no Supabase client in browser)
       const res = await fetch("/api/assessments/save", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -115,24 +104,17 @@ export default function AssessmentPage({
       });
 
       const result = await res.json();
-      console.log("[PELS Submit] API response:", res.status, result);
 
       if (!res.ok) {
         throw new Error(result.error || "Failed to save assessment");
       }
 
-      const assessmentId = result.id;
-      console.log("[PELS Submit] Success! Navigating to results with id:", assessmentId);
       onUpdate({ pels_responses: responses });
-      onNext(assessmentId);
+      onNext(result.id);
     } catch (err: unknown) {
-      console.error("[PELS Submit] Caught error:", err);
-      const message = err instanceof Error
-        ? err.message
-        : typeof err === "object" && err !== null && "message" in err
-        ? String((err as { message: unknown }).message)
-        : JSON.stringify(err);
-      setError(`Failed to save: ${message}`);
+      console.error("Submit error:", err);
+      const message = err instanceof Error ? err.message : "Unknown error";
+      setError("Submission failed: " + message);
       setSubmitting(false);
     }
   };
