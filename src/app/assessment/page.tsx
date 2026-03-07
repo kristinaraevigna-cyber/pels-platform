@@ -46,7 +46,7 @@ export default function AssessmentFlowPage() {
             />
             <div className="min-w-0">
               <p className="text-[10px] sm:text-xs font-sans tracking-[0.2em] uppercase text-stone-400 font-medium">
-                PEL Assessment
+                PELS Assessment
               </p>
               <p className="text-sm text-stone-700 font-medium truncate">
                 {STEP_LABELS[stepIndex]}
