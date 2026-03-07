@@ -1,176 +1,877 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
 
 interface LandingPageProps {
   onStart: () => void;
 }
 
 export default function LandingPage({ onStart }: LandingPageProps) {
-  return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Background texture */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: "linear-gradient(135deg, #F7F3EE 0%, #EDE5D8 40%, #E8DDD0 100%)",
-        }}
-      />
-      <div
-        className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage: `radial-gradient(circle at 20% 80%, #C4956A22 0%, transparent 50%),
-                            radial-gradient(circle at 80% 20%, #8B6F5E22 0%, transparent 50%)`,
-        }}
-      />
+  const serif = "'Cormorant Garamond', Georgia, serif";
+  const sans = "'Inter', system-ui, -apple-system, sans-serif";
 
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 py-20">
+  return (
+    <div style={{ overflowX: "hidden" }}>
+      {/* ─── SECTION 1: HERO ─── */}
+      <section
+        style={{
+          background: "linear-gradient(165deg, #1C1410 0%, #2C2420 40%, #1C1410 100%)",
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "80px 24px",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        {/* Subtle radial glow */}
+        <div
+          style={{
+            position: "absolute",
+            top: "20%",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "800px",
+            height: "800px",
+            background: "radial-gradient(circle, rgba(196,149,106,0.08) 0%, transparent 70%)",
+            pointerEvents: "none",
+          }}
+        />
+
         {/* Logo */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.15 }}
-          className="mb-6"
-        >
+        <div style={{ marginBottom: "40px", position: "relative", zIndex: 1 }}>
           <Image
             src="/PEL Logo.png"
             alt="Positively Energizing Leadership"
-            width={220}
-            height={220}
+            width={200}
+            height={200}
             priority
-            style={{ objectFit: "contain", mixBlendMode: "multiply" }}
+            style={{
+              objectFit: "contain",
+              filter: "brightness(1.1)",
+            }}
           />
-        </motion.div>
+        </div>
 
         {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="mb-8 px-4 py-2 rounded-full border border-[#C4956A]/40 bg-white/50 backdrop-blur-sm"
+        <div
+          style={{
+            marginBottom: "40px",
+            padding: "8px 24px",
+            borderRadius: "100px",
+            border: "1px solid rgba(196,149,106,0.3)",
+            background: "rgba(196,149,106,0.08)",
+            position: "relative",
+            zIndex: 1,
+          }}
         >
           <p
-            className="text-xs tracking-[0.25em] uppercase text-[#8B6F5E]"
-            style={{ fontFamily: "sans-serif", fontWeight: 500 }}
+            style={{
+              fontFamily: sans,
+              fontSize: "11px",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: "#C4956A",
+              fontWeight: 500,
+              margin: 0,
+            }}
           >
-            Validated Research Instrument · University of Pennsylvania IRB #853470
+            University of Pennsylvania &middot; Validated Research Instrument
           </p>
-        </motion.div>
+        </div>
 
-        {/* Title */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.35 }}
-          className="text-center max-w-3xl"
+        {/* Headline */}
+        <h1
+          style={{
+            fontFamily: serif,
+            fontSize: "clamp(40px, 6vw, 72px)",
+            fontWeight: 300,
+            color: "#FFFFFF",
+            textAlign: "center",
+            lineHeight: 1.1,
+            letterSpacing: "-0.02em",
+            maxWidth: "800px",
+            margin: "0 0 24px 0",
+            position: "relative",
+            zIndex: 1,
+          }}
         >
-          <h1
-            className="text-5xl sm:text-7xl text-stone-800 leading-[1.1] mb-6"
-            style={{ fontWeight: 300, letterSpacing: "-0.02em" }}
-          >
-            How Energizing
-            <br />
-            <span className="italic text-[#8B6F5E]">Is Your Leader?</span>
-          </h1>
-          <p className="text-xl text-stone-600 leading-relaxed mb-4" style={{ fontWeight: 300 }}>
-            The Positively Energizing Leadership Scale (PELS) is the first validated
-            measure of leaders' virtuous behavior and relational energy — two forces
-            that powerfully predict your engagement and well-being at work.
-          </p>
-          <p className="text-base text-stone-500 leading-relaxed" style={{ fontWeight: 300 }}>
-            Grounded in Positive Organizational Scholarship, this 15-minute assessment
-            gives you a personalized score, evidence-based insights, and a downloadable
-            report with practical interventions to support your well-being.
-          </p>
-        </motion.div>
+          The Leader Who
+          <br />
+          Energizes You
+          <br />
+          <span style={{ color: "#C4956A", fontStyle: "italic" }}>
+            Changes Everything
+          </span>
+        </h1>
 
-        {/* Stats row */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.55 }}
-          className="flex flex-wrap justify-center gap-8 mt-12 mb-12"
+        {/* Subtitle */}
+        <p
+          style={{
+            fontFamily: sans,
+            fontSize: "18px",
+            fontWeight: 300,
+            color: "rgba(255,255,255,0.6)",
+            textAlign: "center",
+            lineHeight: 1.7,
+            maxWidth: "560px",
+            margin: "0 0 48px 0",
+            position: "relative",
+            zIndex: 1,
+          }}
         >
-          {[
-            { stat: "603", label: "Participants Validated" },
-            { stat: "α = .98", label: "Internal Consistency" },
-            { stat: "18", label: "Validated Items" },
-            { stat: "15 min", label: "Completion Time" },
-          ].map(({ stat, label }) => (
-            <div key={stat} className="text-center">
-              <p
-                className="text-3xl text-[#8B6F5E]"
-                style={{ fontWeight: 300, letterSpacing: "-0.02em" }}
-              >
-                {stat}
-              </p>
-              <p
-                className="text-xs text-stone-500 mt-1 tracking-widest uppercase"
-                style={{ fontFamily: "sans-serif" }}
-              >
-                {label}
-              </p>
+          Discover how your leader&rsquo;s energy shapes your well-being, engagement,
+          and performance — through the first validated measure of positively
+          energizing leadership.
+        </p>
+
+        {/* CTA Button */}
+        <button
+          onClick={onStart}
+          style={{
+            fontFamily: sans,
+            fontSize: "16px",
+            fontWeight: 500,
+            letterSpacing: "0.08em",
+            padding: "18px 48px",
+            backgroundColor: "#C4956A",
+            color: "#1C1410",
+            border: "none",
+            borderRadius: "100px",
+            cursor: "pointer",
+            transition: "all 0.3s ease",
+            position: "relative",
+            zIndex: 1,
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = "#D4A57A";
+            e.currentTarget.style.transform = "translateY(-2px)";
+            e.currentTarget.style.boxShadow = "0 20px 40px rgba(196,149,106,0.3)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = "#C4956A";
+            e.currentTarget.style.transform = "translateY(0)";
+            e.currentTarget.style.boxShadow = "none";
+          }}
+        >
+          BEGIN YOUR ASSESSMENT &rarr;
+        </button>
+
+        <p
+          style={{
+            fontFamily: sans,
+            fontSize: "12px",
+            color: "rgba(255,255,255,0.3)",
+            marginTop: "16px",
+            position: "relative",
+            zIndex: 1,
+          }}
+        >
+          Confidential &middot; 15 minutes &middot; Immediate personalized report
+        </p>
+
+        {/* Scroll indicator */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: "32px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "8px",
+            opacity: 0.4,
+          }}
+        >
+          <p style={{ fontFamily: sans, fontSize: "10px", color: "#C4956A", letterSpacing: "0.15em", textTransform: "uppercase" }}>
+            Learn More
+          </p>
+          <span style={{ color: "#C4956A", fontSize: "18px" }}>&#8595;</span>
+        </div>
+      </section>
+
+      {/* ─── SECTION 2: WHAT IS PEL ─── */}
+      <section
+        style={{
+          backgroundColor: "#FFFFFF",
+          padding: "120px 24px",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "1100px",
+            margin: "0 auto",
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "64px",
+            alignItems: "center",
+          }}
+        >
+          {/* Left: Image */}
+          <div style={{ flex: "1 1 400px", minWidth: "300px" }}>
+            <div
+              style={{
+                width: "100%",
+                aspectRatio: "4/3",
+                borderRadius: "24px",
+                overflow: "hidden",
+                background: "linear-gradient(135deg, #F7F3EE 0%, #EDE5D8 100%)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                position: "relative",
+              }}
+            >
+              {/* Abstract visual representing energizing leadership */}
+              <div style={{ textAlign: "center", padding: "40px" }}>
+                <div
+                  style={{
+                    width: "120px",
+                    height: "120px",
+                    borderRadius: "50%",
+                    background: "linear-gradient(135deg, #C4956A 0%, #8B6F5E 100%)",
+                    margin: "0 auto 24px",
+                    opacity: 0.9,
+                  }}
+                />
+                <div style={{ display: "flex", justifyContent: "center", gap: "12px" }}>
+                  {[60, 80, 100, 80, 60].map((h, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        width: "16px",
+                        height: `${h}px`,
+                        borderRadius: "8px",
+                        backgroundColor: "#C4956A",
+                        opacity: 0.15 + i * 0.15,
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
-          ))}
-        </motion.div>
+          </div>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
-          className="flex flex-col items-center gap-4"
-        >
-          <button
-            onClick={onStart}
-            className="group relative px-12 py-5 bg-[#8B6F5E] text-white rounded-full text-lg transition-all duration-300 hover:bg-[#7A6050] hover:shadow-xl hover:shadow-[#8B6F5E]/20 hover:scale-105 active:scale-100"
-            style={{ fontFamily: "sans-serif", fontWeight: 400, letterSpacing: "0.05em" }}
-          >
-            Begin Assessment
-            <span className="ml-3 inline-block transition-transform group-hover:translate-x-1">→</span>
-          </button>
-          <p className="text-xs text-stone-400" style={{ fontFamily: "sans-serif" }}>
-            Your responses are confidential. Takes approximately 15 minutes.
-          </p>
-        </motion.div>
+          {/* Right: Text */}
+          <div style={{ flex: "1 1 400px", minWidth: "300px" }}>
+            <p
+              style={{
+                fontFamily: sans,
+                fontSize: "11px",
+                fontWeight: 600,
+                letterSpacing: "0.25em",
+                textTransform: "uppercase",
+                color: "#C4956A",
+                marginBottom: "16px",
+              }}
+            >
+              What Is Positively Energizing Leadership?
+            </p>
+            <h2
+              style={{
+                fontFamily: serif,
+                fontSize: "40px",
+                fontWeight: 300,
+                color: "#1C1410",
+                lineHeight: 1.15,
+                letterSpacing: "-0.01em",
+                marginBottom: "24px",
+              }}
+            >
+              Leaders who create energy
+              <br />
+              <span style={{ fontStyle: "italic", color: "#8B6F5E" }}>
+                unlock human flourishing
+              </span>
+            </h2>
+            <p
+              style={{
+                fontFamily: sans,
+                fontSize: "16px",
+                fontWeight: 300,
+                color: "#666",
+                lineHeight: 1.8,
+                marginBottom: "20px",
+              }}
+            >
+              Positively energizing leaders exhibit <strong style={{ fontWeight: 500, color: "#1C1410" }}>virtuous behaviors</strong> —
+              compassion, integrity, forgiveness, and gratitude — while fostering{" "}
+              <strong style={{ fontWeight: 500, color: "#1C1410" }}>relational energy</strong> that
+              revitalizes the people around them.
+            </p>
+            <p
+              style={{
+                fontFamily: sans,
+                fontSize: "16px",
+                fontWeight: 300,
+                color: "#666",
+                lineHeight: 1.8,
+                marginBottom: "24px",
+              }}
+            >
+              Research in Positive Organizational Scholarship shows this is the
+              <strong style={{ fontWeight: 500, color: "#1C1410" }}> heliotropic effect</strong> —
+              just as living systems lean toward light, people flourish when led by
+              those who generate positive energy.
+            </p>
 
-        {/* What to expect */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.9 }}
-          className="mt-20 max-w-2xl w-full"
-        >
-          <p
-            className="text-center text-xs tracking-[0.2em] uppercase text-stone-400 mb-6"
-            style={{ fontFamily: "sans-serif" }}
-          >
-            What to Expect
-          </p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {[
-              { num: "01", title: "Your Background", desc: "Brief context about you and your leader" },
-              { num: "02", title: "Your Stories", desc: "2 short narratives about your leader's impact" },
-              { num: "03", title: "Well-Being Questions", desc: "3 open-ended questions about your experience" },
-              { num: "04", title: "The Scale + Report", desc: "18 items and your personalized PDF report" },
-            ].map(({ num, title, desc }) => (
-              <div key={num} className="bg-white/50 backdrop-blur-sm rounded-2xl p-4 border border-stone-200/60">
-                <p
-                  className="text-[#C4956A] text-xs mb-2"
-                  style={{ fontFamily: "sans-serif", fontWeight: 600 }}
-                >
-                  {num}
+            {/* Two pillars */}
+            <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
+              <div
+                style={{
+                  flex: "1 1 200px",
+                  padding: "20px",
+                  borderRadius: "16px",
+                  backgroundColor: "#F7F3EE",
+                  border: "1px solid #EDE5D8",
+                }}
+              >
+                <p style={{ fontFamily: sans, fontSize: "13px", fontWeight: 600, color: "#8B6F5E", marginBottom: "6px" }}>
+                  Relational Energy
                 </p>
-                <p className="text-stone-800 text-sm font-semibold mb-1">{title}</p>
-                <p className="text-stone-500 text-xs leading-relaxed" style={{ fontFamily: "sans-serif" }}>
+                <p style={{ fontFamily: sans, fontSize: "13px", fontWeight: 300, color: "#888", lineHeight: 1.6 }}>
+                  The vitality and uplift people feel from interacting with their leader
+                </p>
+              </div>
+              <div
+                style={{
+                  flex: "1 1 200px",
+                  padding: "20px",
+                  borderRadius: "16px",
+                  backgroundColor: "#F7F3EE",
+                  border: "1px solid #EDE5D8",
+                }}
+              >
+                <p style={{ fontFamily: sans, fontSize: "13px", fontWeight: 600, color: "#8B6F5E", marginBottom: "6px" }}>
+                  Virtuous Behavior
+                </p>
+                <p style={{ fontFamily: sans, fontSize: "13px", fontWeight: 300, color: "#888", lineHeight: 1.6 }}>
+                  Compassion, integrity, forgiveness, and gratitude in action
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── SECTION 3: WHY IT MATTERS ─── */}
+      <section
+        style={{
+          background: "linear-gradient(165deg, #1C1410 0%, #2C2420 100%)",
+          padding: "120px 24px",
+        }}
+      >
+        <div style={{ maxWidth: "1000px", margin: "0 auto", textAlign: "center" }}>
+          <p
+            style={{
+              fontFamily: sans,
+              fontSize: "11px",
+              fontWeight: 600,
+              letterSpacing: "0.25em",
+              textTransform: "uppercase",
+              color: "#C4956A",
+              marginBottom: "16px",
+            }}
+          >
+            Why It Matters
+          </p>
+          <h2
+            style={{
+              fontFamily: serif,
+              fontSize: "44px",
+              fontWeight: 300,
+              color: "#FFFFFF",
+              lineHeight: 1.15,
+              marginBottom: "16px",
+            }}
+          >
+            The data is{" "}
+            <span style={{ fontStyle: "italic", color: "#C4956A" }}>unequivocal</span>
+          </h2>
+          <p
+            style={{
+              fontFamily: sans,
+              fontSize: "16px",
+              fontWeight: 300,
+              color: "rgba(255,255,255,0.5)",
+              lineHeight: 1.7,
+              maxWidth: "600px",
+              margin: "0 auto 64px",
+            }}
+          >
+            Positively energizing leadership is one of the strongest predictors of
+            employee well-being and engagement ever documented.
+          </p>
+
+          {/* Stats grid */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+              gap: "24px",
+            }}
+          >
+            {[
+              {
+                stat: "β = .56",
+                label: "Engagement",
+                desc: "Positively energizing leadership predicts engagement above and beyond all other leadership styles measured",
+              },
+              {
+                stat: "β = .57",
+                label: "Well-Being",
+                desc: "Nearly 60% of variance in employee well-being is explained by their leader's energizing behaviors",
+              },
+              {
+                stat: "77%",
+                label: "Burnout Risk",
+                desc: "Of employees report burnout symptoms; energizing leaders are the strongest documented buffer",
+              },
+              {
+                stat: "59%",
+                label: "Quiet Quitting",
+                desc: "Of the global workforce is quietly disengaged — energizing leadership reverses this trajectory",
+              },
+            ].map(({ stat, label, desc }) => (
+              <div
+                key={stat}
+                style={{
+                  padding: "36px 28px",
+                  borderRadius: "20px",
+                  border: "1px solid rgba(196,149,106,0.15)",
+                  backgroundColor: "rgba(196,149,106,0.04)",
+                  textAlign: "left",
+                }}
+              >
+                <p
+                  style={{
+                    fontFamily: serif,
+                    fontSize: "42px",
+                    fontWeight: 300,
+                    color: "#C4956A",
+                    letterSpacing: "-0.02em",
+                    marginBottom: "4px",
+                    lineHeight: 1,
+                  }}
+                >
+                  {stat}
+                </p>
+                <p
+                  style={{
+                    fontFamily: sans,
+                    fontSize: "12px",
+                    fontWeight: 600,
+                    letterSpacing: "0.15em",
+                    textTransform: "uppercase",
+                    color: "rgba(255,255,255,0.7)",
+                    marginBottom: "12px",
+                  }}
+                >
+                  {label}
+                </p>
+                <p
+                  style={{
+                    fontFamily: sans,
+                    fontSize: "14px",
+                    fontWeight: 300,
+                    color: "rgba(255,255,255,0.4)",
+                    lineHeight: 1.6,
+                  }}
+                >
                   {desc}
                 </p>
               </div>
             ))}
           </div>
-        </motion.div>
-      </div>
+        </div>
+      </section>
+
+      {/* ─── SECTION 4: THE RESEARCH ─── */}
+      <section
+        style={{
+          backgroundColor: "#F7F3EE",
+          padding: "120px 24px",
+        }}
+      >
+        <div style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center" }}>
+          <p
+            style={{
+              fontFamily: sans,
+              fontSize: "11px",
+              fontWeight: 600,
+              letterSpacing: "0.25em",
+              textTransform: "uppercase",
+              color: "#C4956A",
+              marginBottom: "16px",
+            }}
+          >
+            The Research
+          </p>
+          <h2
+            style={{
+              fontFamily: serif,
+              fontSize: "44px",
+              fontWeight: 300,
+              color: "#1C1410",
+              lineHeight: 1.15,
+              marginBottom: "16px",
+            }}
+          >
+            Rigorously developed.{" "}
+            <span style={{ fontStyle: "italic", color: "#8B6F5E" }}>Empirically validated.</span>
+          </h2>
+          <p
+            style={{
+              fontFamily: sans,
+              fontSize: "16px",
+              fontWeight: 300,
+              color: "#888",
+              lineHeight: 1.7,
+              maxWidth: "640px",
+              margin: "0 auto 56px",
+            }}
+          >
+            The PELS was developed through a multi-phase validation study at the
+            University of Pennsylvania, following the highest standards of
+            psychometric instrument development.
+          </p>
+
+          {/* Research details */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+              gap: "24px",
+              marginBottom: "56px",
+            }}
+          >
+            {[
+              { value: "603", label: "Participants" },
+              { value: "α = .98", label: "Internal Consistency" },
+              { value: "18", label: "Validated Items" },
+              { value: "2", label: "Subdomains" },
+            ].map(({ value, label }) => (
+              <div
+                key={label}
+                style={{
+                  padding: "32px 20px",
+                  borderRadius: "20px",
+                  backgroundColor: "#FFFFFF",
+                  border: "1px solid #EDE5D8",
+                }}
+              >
+                <p
+                  style={{
+                    fontFamily: serif,
+                    fontSize: "48px",
+                    fontWeight: 300,
+                    color: "#8B6F5E",
+                    letterSpacing: "-0.02em",
+                    marginBottom: "4px",
+                    lineHeight: 1,
+                  }}
+                >
+                  {value}
+                </p>
+                <p
+                  style={{
+                    fontFamily: sans,
+                    fontSize: "12px",
+                    fontWeight: 500,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    color: "#AAA",
+                  }}
+                >
+                  {label}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Methodology note */}
+          <div
+            style={{
+              padding: "32px 40px",
+              borderRadius: "20px",
+              backgroundColor: "#FFFFFF",
+              border: "1px solid #EDE5D8",
+              textAlign: "left",
+              maxWidth: "700px",
+              margin: "0 auto",
+            }}
+          >
+            <p style={{ fontFamily: sans, fontSize: "13px", fontWeight: 600, color: "#8B6F5E", marginBottom: "12px" }}>
+              Validation Methodology
+            </p>
+            <p style={{ fontFamily: sans, fontSize: "14px", fontWeight: 300, color: "#666", lineHeight: 1.7, marginBottom: "12px" }}>
+              The PELS underwent exploratory factor analysis, confirmatory factor analysis,
+              and convergent/discriminant validity testing. The 18-item scale measures two
+              subdomains — <strong style={{ fontWeight: 500, color: "#1C1410" }}>Relational Energy</strong> (9 items)
+              and <strong style={{ fontWeight: 500, color: "#1C1410" }}>Virtuous Behavior</strong> (9 items) —
+              with an overall Cronbach&rsquo;s alpha of .98.
+            </p>
+            <p style={{ fontFamily: sans, fontSize: "12px", fontWeight: 400, color: "#AAA" }}>
+              IRB Protocol #853470 &middot; University of Pennsylvania
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── SECTION 5: HOW IT WORKS ─── */}
+      <section
+        style={{
+          backgroundColor: "#FFFFFF",
+          padding: "120px 24px",
+        }}
+      >
+        <div style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center" }}>
+          <p
+            style={{
+              fontFamily: sans,
+              fontSize: "11px",
+              fontWeight: 600,
+              letterSpacing: "0.25em",
+              textTransform: "uppercase",
+              color: "#C4956A",
+              marginBottom: "16px",
+            }}
+          >
+            How It Works
+          </p>
+          <h2
+            style={{
+              fontFamily: serif,
+              fontSize: "44px",
+              fontWeight: 300,
+              color: "#1C1410",
+              lineHeight: 1.15,
+              marginBottom: "56px",
+            }}
+          >
+            Four steps to{" "}
+            <span style={{ fontStyle: "italic", color: "#8B6F5E" }}>your personalized report</span>
+          </h2>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+              gap: "32px",
+            }}
+          >
+            {[
+              {
+                step: "01",
+                icon: "📋",
+                title: "Your Background",
+                desc: "A brief intake about your role, organization, and the leader you'll be evaluating",
+              },
+              {
+                step: "02",
+                icon: "✍️",
+                title: "Leader Narratives",
+                desc: "Share two short stories that capture how your leader energizes (or de-energizes) those around them",
+              },
+              {
+                step: "03",
+                icon: "📊",
+                title: "The PELS Scale",
+                desc: "Rate your leader on 18 validated items across relational energy and virtuous behavior",
+              },
+              {
+                step: "04",
+                icon: "📄",
+                title: "Your Report",
+                desc: "Receive your personalized score, attribute profile, and evidence-based practices — downloadable as PDF",
+              },
+            ].map(({ step, icon, title, desc }) => (
+              <div
+                key={step}
+                style={{
+                  padding: "36px 24px",
+                  borderRadius: "24px",
+                  border: "1px solid #EDE5D8",
+                  backgroundColor: "#FAFAF8",
+                  textAlign: "center",
+                  transition: "all 0.3s ease",
+                }}
+              >
+                <div
+                  style={{
+                    width: "56px",
+                    height: "56px",
+                    borderRadius: "16px",
+                    background: "linear-gradient(135deg, #F7F3EE 0%, #EDE5D8 100%)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "24px",
+                    margin: "0 auto 20px",
+                  }}
+                >
+                  {icon}
+                </div>
+                <p
+                  style={{
+                    fontFamily: sans,
+                    fontSize: "11px",
+                    fontWeight: 600,
+                    color: "#C4956A",
+                    letterSpacing: "0.15em",
+                    marginBottom: "8px",
+                  }}
+                >
+                  STEP {step}
+                </p>
+                <p
+                  style={{
+                    fontFamily: serif,
+                    fontSize: "22px",
+                    fontWeight: 400,
+                    color: "#1C1410",
+                    marginBottom: "8px",
+                  }}
+                >
+                  {title}
+                </p>
+                <p
+                  style={{
+                    fontFamily: sans,
+                    fontSize: "14px",
+                    fontWeight: 300,
+                    color: "#888",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── SECTION 6: FINAL CTA ─── */}
+      <section
+        style={{
+          background: "linear-gradient(165deg, #C4956A 0%, #8B6F5E 100%)",
+          padding: "120px 24px",
+          textAlign: "center",
+        }}
+      >
+        <div style={{ maxWidth: "600px", margin: "0 auto" }}>
+          <div style={{ marginBottom: "32px" }}>
+            <Image
+              src="/PEL Logo.png"
+              alt="Positively Energizing Leadership"
+              width={100}
+              height={100}
+              style={{
+                objectFit: "contain",
+                filter: "brightness(1.2)",
+                margin: "0 auto",
+              }}
+            />
+          </div>
+          <h2
+            style={{
+              fontFamily: serif,
+              fontSize: "44px",
+              fontWeight: 300,
+              color: "#FFFFFF",
+              lineHeight: 1.15,
+              marginBottom: "16px",
+            }}
+          >
+            Ready to discover your
+            <br />
+            <span style={{ fontStyle: "italic" }}>leadership energy profile?</span>
+          </h2>
+          <p
+            style={{
+              fontFamily: sans,
+              fontSize: "16px",
+              fontWeight: 300,
+              color: "rgba(255,255,255,0.75)",
+              lineHeight: 1.7,
+              marginBottom: "40px",
+            }}
+          >
+            Take the validated 18-item assessment and receive your personalized
+            report with evidence-based practices to support your well-being at work.
+          </p>
+          <button
+            onClick={onStart}
+            style={{
+              fontFamily: sans,
+              fontSize: "16px",
+              fontWeight: 600,
+              letterSpacing: "0.08em",
+              padding: "20px 56px",
+              backgroundColor: "#FFFFFF",
+              color: "#8B6F5E",
+              border: "none",
+              borderRadius: "100px",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.15)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-2px)";
+              e.currentTarget.style.boxShadow = "0 16px 48px rgba(0,0,0,0.2)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,0,0,0.15)";
+            }}
+          >
+            BEGIN ASSESSMENT &rarr;
+          </button>
+          <p
+            style={{
+              fontFamily: sans,
+              fontSize: "11px",
+              color: "rgba(255,255,255,0.4)",
+              marginTop: "20px",
+            }}
+          >
+            Based on: Cameron, K.S. &amp; Plews, E. (2012). Positive Leadership in Action.
+          </p>
+        </div>
+      </section>
+
+      {/* ─── FOOTER ─── */}
+      <footer
+        style={{
+          backgroundColor: "#1C1410",
+          padding: "40px 24px",
+          textAlign: "center",
+        }}
+      >
+        <p
+          style={{
+            fontFamily: sans,
+            fontSize: "12px",
+            color: "rgba(255,255,255,0.3)",
+            marginBottom: "4px",
+          }}
+        >
+          &copy; {new Date().getFullYear()} Positively Energizing Leadership Scale
+        </p>
+        <p
+          style={{
+            fontFamily: sans,
+            fontSize: "11px",
+            color: "rgba(255,255,255,0.2)",
+          }}
+        >
+          University of Pennsylvania &middot; IRB Protocol #853470 &middot; Burke et al. (2023). Positive Health. Routledge.
+        </p>
+      </footer>
     </div>
   );
 }
