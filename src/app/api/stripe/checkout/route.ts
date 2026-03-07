@@ -26,8 +26,8 @@ export async function POST() {
         user_id: user.id,
       },
       customer_email: user.email,
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/payment/cancel`,
+      success_url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://pels-platform.onrender.com"}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://pels-platform.onrender.com"}/payment/cancel`,
     });
 
     return NextResponse.json({ url: session.url });
