@@ -26,12 +26,12 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         {/* Logo */}
         <div style={{ display: "flex", justifyContent: "center", marginBottom: "28px", paddingTop: "12px" }}>
           <Image
-            src="/PEL 2.png"
+            src="/PEL3.png"
             alt="Positively Energizing Leadership"
-            width={320}
-            height={120}
+            width={260}
+            height={260}
             priority
-            style={{ objectFit: "contain", maxWidth: "280px", mixBlendMode: "multiply" }}
+            style={{ objectFit: "contain", maxHeight: "220px", mixBlendMode: "multiply" }}
           />
         </div>
 
