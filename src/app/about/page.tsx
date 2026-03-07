@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-
 const serif = "'Cormorant Garamond', Georgia, serif";
 const sans = "'Inter', system-ui, -apple-system, sans-serif";
 
@@ -175,24 +173,21 @@ export default function AboutPage() {
               padding: "40px",
             }}
           >
-            <div
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/kshea-headshot.jpg"
+              alt="Kristina Shea"
+              width={280}
+              height={280}
               style={{
                 width: 280,
                 height: 280,
                 borderRadius: 20,
-                overflow: "hidden",
+                objectFit: "cover",
                 boxShadow: "0 12px 40px rgba(0,0,0,0.1)",
-                position: "relative",
+                display: "block",
               }}
-            >
-              <Image
-                src="/KShea headshot.jpg"
-                alt="Kristina Shea"
-                fill
-                style={{ objectFit: "cover" }}
-                sizes="280px"
-              />
-            </div>
+            />
           </div>
 
           {/* Bio */}
