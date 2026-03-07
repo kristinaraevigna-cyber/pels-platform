@@ -55,7 +55,9 @@ export default function AssessmentPage({
     setError(null);
 
     try {
+      console.log("[PELS Submit] Starting submission...");
       const score = scorePELS(responses);
+      console.log("[PELS Submit] Score calculated:", score);
 
       // Build the assessment record
       const record: Record<string, unknown> = {
@@ -87,31 +89,49 @@ export default function AssessmentPage({
 
       // Add PERMA+4 responses and computed scores
       const permaResponses = data.perma_responses || {};
+      const permaCount = Object.keys(permaResponses).length;
+      console.log("[PELS Submit] PERMA responses count:", permaCount);
+
       for (let i = 1; i <= 29; i++) {
         record[`perma_${i}`] = permaResponses[i] || null;
       }
-      if (Object.keys(permaResponses).length === 29) {
+      if (permaCount === 29) {
         const permaScore = scorePerma(permaResponses);
+        console.log("[PELS Submit] PERMA score calculated:", permaScore);
         PERMA_SUBSCALES.forEach((sub) => {
           record[`perma_${sub.key.toLowerCase()}_mean`] = permaScore.subscaleScores[sub.key];
         });
         record.perma_total_mean = permaScore.totalMean;
       }
 
+      console.log("[PELS Submit] Record keys:", Object.keys(record));
+
       const supabase = createClient();
+
+      // Check if user is authenticated
+      const { data: { user }, error: authError } = await supabase.auth.getUser();
+      console.log("[PELS Submit] Auth check — user:", user?.id || "none", "error:", authError?.message || "none");
+
       const { data: inserted, error: dbError } = await supabase
         .from("assessments")
         .insert(record)
         .select("id")
         .single();
 
-      if (dbError) throw dbError;
+      if (dbError) {
+        console.error("[PELS Submit] DB error:", dbError);
+        throw dbError;
+      }
 
+      console.log("[PELS Submit] Insert successful, id:", inserted.id);
       onUpdate({ pels_responses: responses });
       onNext(inserted.id);
-    } catch (err) {
-      console.error(err);
-      setError("There was an issue saving your responses. Please try again.");
+    } catch (err: unknown) {
+      console.error("[PELS Submit] Caught error:", err);
+      const message = err instanceof Error ? err.message
+        : typeof err === "object" && err !== null && "message" in err ? String((err as { message: unknown }).message)
+        : "Unknown error";
+      setError(`Failed to save: ${message}. Please try again or contact support.`);
       setSubmitting(false);
     }
   };
@@ -233,9 +253,18 @@ export default function AssessmentPage({
           </p>
         )}
         {error && (
-          <p className="text-center text-sm text-rose-600" style={{ fontFamily: "sans-serif" }}>
-            {error}
-          </p>
+          <div className="bg-rose-50 border border-rose-200 rounded-2xl p-4 text-center">
+            <p className="text-sm text-rose-700 mb-2" style={{ fontFamily: "sans-serif" }}>
+              {error}
+            </p>
+            <button
+              onClick={() => { setError(null); setSubmitting(false); }}
+              className="text-xs text-rose-600 underline"
+              style={{ fontFamily: "sans-serif" }}
+            >
+              Dismiss and try again
+            </button>
+          </div>
         )}
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
           <button
