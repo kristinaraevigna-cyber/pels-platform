@@ -36,29 +36,14 @@ export default function LandingPage({ onStart }: LandingPageProps) {
           }}
         />
 
-        {/* Navbar — simple text link */}
+        {/* Navbar — text only, no logo */}
         <nav
           style={{
-            display: "flex",
-            alignItems: "center",
             padding: "28px 40px",
             position: "relative",
             zIndex: 2,
           }}
-        >
-          <span
-            style={{
-              fontFamily: serif,
-              fontSize: "18px",
-              fontWeight: 400,
-              fontStyle: "italic",
-              color: "#C4956A",
-              letterSpacing: "-0.01em",
-            }}
-          >
-            Positively Energizing Leadership
-          </span>
-        </nav>
+        />
 
         {/* Hero split layout */}
         <div
@@ -185,7 +170,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
             </p>
           </div>
 
-          {/* RIGHT: Decorative logo illustration */}
+          {/* RIGHT: Decorative illustration */}
           <div
             style={{
               flex: "1 1 50%",
@@ -193,21 +178,23 @@ export default function LandingPage({ onStart }: LandingPageProps) {
               display: "flex",
               justifyContent: "flex-end",
               alignItems: "center",
-              minHeight: "400px",
+              overflow: "hidden",
+              minHeight: "420px",
+              marginBottom: "-80px",
             }}
             className="hero-illustration"
           >
             <Image
-              src="/PEL 2.png"
+              src="/PEL3.png"
               alt=""
-              width={600}
-              height={600}
+              width={500}
+              height={500}
               priority
               style={{
                 objectFit: "contain",
                 width: "auto",
-                height: "clamp(300px, 45vw, 420px)",
-                marginRight: "-60px",
+                height: "400px",
+                marginRight: "-20px",
                 mixBlendMode: "screen",
                 opacity: 0.9,
               }}
@@ -241,12 +228,9 @@ export default function LandingPage({ onStart }: LandingPageProps) {
       <style>{`
         @media (max-width: 768px) {
           .hero-split {
-            flex-direction: column-reverse !important;
+            flex-direction: column !important;
             text-align: center !important;
-            padding: 0 24px 60px !important;
-          }
-          .hero-split > div:first-child {
-            align-items: center !important;
+            padding: 0 24px 40px !important;
           }
           .hero-split > div:first-child h1,
           .hero-split > div:first-child p {
@@ -258,12 +242,13 @@ export default function LandingPage({ onStart }: LandingPageProps) {
           }
           .hero-illustration {
             justify-content: center !important;
-            min-height: 240px !important;
-            margin-bottom: 20px;
+            min-height: 220px !important;
+            margin-bottom: 0 !important;
+            order: 2;
           }
           .hero-illustration img {
             margin-right: 0 !important;
-            height: 240px !important;
+            height: 260px !important;
           }
         }
       `}</style>
@@ -363,10 +348,10 @@ export default function LandingPage({ onStart }: LandingPageProps) {
                 marginBottom: "24px",
               }}
             >
-              Research in Positive Organizational Scholarship shows this is the
-              <strong style={{ fontWeight: 500, color: "#1C1410" }}> heliotropic effect</strong> —
-              just as living systems lean toward light, people flourish when led by
-              those who generate positive energy.
+              Just as plants turn toward sunlight to grow, people naturally flourish in the
+              presence of leaders who generate positive energy. Positively energizing leaders
+              don&apos;t just manage — they vitalize. They leave people feeling more capable, more
+              motivated, and more alive at work.
             </p>
 
             {/* Two pillars */}
