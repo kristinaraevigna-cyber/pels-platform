@@ -47,10 +47,7 @@ function LoginForm() {
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo:
-          typeof window !== "undefined"
-            ? window.location.origin + "/auth/callback"
-            : "https://pels-platform.onrender.com/auth/callback",
+        redirectTo: "https://pels-platform.onrender.com/auth/callback",
       },
     });
   }
