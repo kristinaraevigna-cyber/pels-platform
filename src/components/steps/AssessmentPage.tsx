@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import type { AssessmentData } from "@/lib/types";
 import { PELS_ITEMS, LIKERT_LABELS, scorePELS } from "@/lib/pels-data";
 import { PERMA_SUBSCALES, scorePerma } from "@/lib/perma-data";
-import { createClient } from "@/lib/supabase";
 
 interface AssessmentPageProps {
   data: AssessmentData;
@@ -106,31 +105,40 @@ export default function AssessmentPage({
         record.perma_overall_mean = permaScore.totalMean;
       }
 
+      // Generate ID client-side to avoid needing .select().single() after insert
+      const assessmentId = crypto.randomUUID();
+      record.id = assessmentId;
+
       console.log("[PELS Submit] Record keys (" + Object.keys(record).length + "):", Object.keys(record));
+      console.log("[PELS Submit] Generated ID:", assessmentId);
+      console.log("[PELS Submit] Inserting via fetch...");
 
-      const supabase = createClient();
-      console.log("[PELS Submit] Supabase client created, inserting...");
+      // Use fetch directly instead of Supabase JS client to avoid potential hanging
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+      const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
-      const { data: inserted, error: dbError } = await supabase
-        .from("assessments")
-        .insert(record)
-        .select("id")
-        .single();
+      const res = await fetch(`${supabaseUrl}/rest/v1/assessments`, {
+        method: "POST",
+        headers: {
+          "apikey": supabaseKey,
+          "Authorization": `Bearer ${supabaseKey}`,
+          "Content-Type": "application/json",
+          "Prefer": "return=minimal",
+        },
+        body: JSON.stringify(record),
+      });
 
-      console.log("[PELS Submit] Insert result — data:", inserted, "error:", dbError);
+      console.log("[PELS Submit] Fetch response status:", res.status);
 
-      if (dbError) {
-        console.error("[PELS Submit] INSERT FAILED:", dbError.message, dbError.details, dbError.hint);
-        throw new Error(dbError.message || JSON.stringify(dbError));
+      if (!res.ok) {
+        const errorBody = await res.text();
+        console.error("[PELS Submit] INSERT FAILED:", res.status, errorBody);
+        throw new Error(`Database error (${res.status}): ${errorBody}`);
       }
 
-      if (!inserted || !inserted.id) {
-        throw new Error("Insert succeeded but no ID was returned");
-      }
-
-      console.log("[PELS Submit] Success! Navigating to results with id:", inserted.id);
+      console.log("[PELS Submit] Success! Navigating to results with id:", assessmentId);
       onUpdate({ pels_responses: responses });
-      onNext(inserted.id);
+      onNext(assessmentId);
     } catch (err: unknown) {
       console.error("[PELS Submit] Caught error:", err);
       const message = err instanceof Error
