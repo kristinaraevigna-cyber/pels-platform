@@ -98,8 +98,8 @@ export default function SignupPage() {
       return;
     }
 
-    // No promo code — redirect to payment
-    router.push("/payment");
+    // No promo code — redirect to access code page
+    router.push("/access-code");
     router.refresh();
   }
 

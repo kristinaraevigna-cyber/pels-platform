@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
         );
       } else {
         return NextResponse.redirect(
-          new URL("/payment", requestUrl.origin)
+          new URL("/access-code", requestUrl.origin)
         );
       }
     }
