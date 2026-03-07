@@ -448,7 +448,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
                   borderRadius: "20px",
                   border: "1px solid rgba(196,149,106,0.15)",
                   backgroundColor: "rgba(196,149,106,0.04)",
-                  textAlign: "left",
+                  textAlign: "center",
                 }}
               >
                 <p
@@ -663,29 +663,61 @@ export default function LandingPage({ onStart }: LandingPageProps) {
             {[
               {
                 step: "01",
-                icon: "📋",
                 title: "Your Background",
                 desc: "A brief intake about your role, organization, and the leader you'll be evaluating",
+                svg: (
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#C4956A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="6" y="4" width="20" height="24" rx="3" />
+                    <circle cx="16" cy="13" r="4" />
+                    <path d="M10 24c0-3.3 2.7-6 6-6s6 2.7 6 6" />
+                  </svg>
+                ),
               },
               {
                 step: "02",
-                icon: "✍️",
                 title: "Leader Narratives",
                 desc: "Share two short stories that capture how your leader energizes (or de-energizes) those around them",
+                svg: (
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#C4956A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 27V7a2 2 0 012-2h8l2 2h2a2 2 0 012 2v3" />
+                    <path d="M5 27a2 2 0 002 2h6" />
+                    <path d="M16 15v14l4-3 4 3V15" />
+                    <path d="M16 15h8a2 2 0 012 2v0" />
+                    <path d="M16 15a2 2 0 00-2-2H5" />
+                  </svg>
+                ),
               },
               {
                 step: "03",
-                icon: "📊",
                 title: "The PELS Scale",
                 desc: "Rate your leader on 18 validated items across relational energy and virtuous behavior",
+                svg: (
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#C4956A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="6" y="22" width="4" height="6" rx="1" />
+                    <rect x="14" y="16" width="4" height="12" rx="1" />
+                    <rect x="22" y="10" width="4" height="18" rx="1" />
+                    <path d="M6 6l6 4 6-3 8 2" />
+                    <circle cx="6" cy="6" r="1.5" />
+                    <circle cx="12" cy="10" r="1.5" />
+                    <circle cx="18" cy="7" r="1.5" />
+                    <circle cx="26" cy="9" r="1.5" />
+                  </svg>
+                ),
               },
               {
                 step: "04",
-                icon: "📄",
                 title: "Your Report",
                 desc: "Receive your personalized score, attribute profile, and evidence-based practices — downloadable as PDF",
+                svg: (
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#C4956A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M8 4h10l6 6v18a2 2 0 01-2 2H8a2 2 0 01-2-2V6a2 2 0 012-2z" />
+                    <path d="M18 4v6h6" />
+                    <path d="M16 18v8" />
+                    <path d="M12 22l4 4 4-4" />
+                  </svg>
+                ),
               },
-            ].map(({ step, icon, title, desc }) => (
+            ].map(({ step, svg, title, desc }) => (
               <div
                 key={step}
                 style={{
@@ -706,11 +738,10 @@ export default function LandingPage({ onStart }: LandingPageProps) {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    fontSize: "24px",
                     margin: "0 auto 20px",
                   }}
                 >
-                  {icon}
+                  {svg}
                 </div>
                 <p
                   style={{
