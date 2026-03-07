@@ -23,172 +23,196 @@ export default function LandingPage({ onStart }: LandingPageProps) {
           overflow: "hidden",
         }}
       >
-        {/* Subtle radial glow */}
+        {/* Radial glow behind illustration */}
         <div
           style={{
             position: "absolute",
-            top: "20%",
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: "800px",
-            height: "800px",
-            background: "radial-gradient(circle, rgba(196,149,106,0.08) 0%, transparent 70%)",
+            top: "10%",
+            right: "-5%",
+            width: "700px",
+            height: "700px",
+            background: "radial-gradient(circle, rgba(196,149,106,0.12) 0%, transparent 65%)",
             pointerEvents: "none",
           }}
         />
 
-        {/* Top navbar with logo */}
+        {/* Navbar — simple text link */}
         <nav
           style={{
             display: "flex",
             alignItems: "center",
-            padding: "24px 32px",
+            padding: "28px 40px",
             position: "relative",
             zIndex: 2,
           }}
         >
-          <Image
-            src="/PEL 2.png"
-            alt="Positively Energizing Leadership"
-            width={200}
-            height={60}
-            priority
+          <span
             style={{
-              objectFit: "contain",
-              maxHeight: "48px",
-              filter: "brightness(0) invert(1)",
-              opacity: 0.85,
+              fontFamily: serif,
+              fontSize: "18px",
+              fontWeight: 400,
+              fontStyle: "italic",
+              color: "#C4956A",
+              letterSpacing: "-0.01em",
             }}
-          />
+          >
+            Positively Energizing Leadership
+          </span>
         </nav>
 
-        {/* Hero content */}
+        {/* Hero split layout */}
         <div
           style={{
             flex: 1,
             display: "flex",
-            flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center",
-            padding: "0 24px 80px",
+            position: "relative",
+            zIndex: 1,
+            maxWidth: "1200px",
+            margin: "0 auto",
+            width: "100%",
+            padding: "0 40px 80px",
           }}
+          className="hero-split"
         >
-          {/* Badge */}
-          <div
-            style={{
-              marginBottom: "40px",
-              padding: "8px 24px",
-              borderRadius: "100px",
-              border: "1px solid rgba(196,149,106,0.3)",
-              background: "rgba(196,149,106,0.08)",
-              position: "relative",
-              zIndex: 1,
-            }}
-          >
+          {/* LEFT: Text content */}
+          <div style={{ flex: "1 1 50%", position: "relative", zIndex: 2 }}>
+            {/* Badge */}
+            <div
+              style={{
+                marginBottom: "32px",
+                padding: "8px 24px",
+                borderRadius: "100px",
+                border: "1px solid rgba(196,149,106,0.3)",
+                background: "rgba(196,149,106,0.08)",
+                display: "inline-block",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: sans,
+                  fontSize: "11px",
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  color: "#C4956A",
+                  fontWeight: 500,
+                  margin: 0,
+                }}
+              >
+                Validated Research Instrument
+              </p>
+            </div>
+
+            {/* Headline */}
+            <h1
+              style={{
+                fontFamily: serif,
+                fontSize: "clamp(36px, 5vw, 68px)",
+                fontWeight: 300,
+                color: "#FFFFFF",
+                textAlign: "left",
+                lineHeight: 1.08,
+                letterSpacing: "-0.02em",
+                margin: "0 0 28px 0",
+              }}
+            >
+              The Leader Who
+              <br />
+              Energizes You
+              <br />
+              <span style={{ color: "#C4956A", fontStyle: "italic" }}>
+                Changes Everything
+              </span>
+            </h1>
+
+            {/* Subtitle */}
             <p
               style={{
                 fontFamily: sans,
-                fontSize: "11px",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "#C4956A",
-                fontWeight: 500,
-                margin: 0,
+                fontSize: "17px",
+                fontWeight: 300,
+                color: "rgba(255,255,255,0.55)",
+                textAlign: "left",
+                lineHeight: 1.7,
+                maxWidth: "480px",
+                margin: "0 0 40px 0",
               }}
             >
-              Validated Research Instrument
+              Discover how your leader&rsquo;s energy shapes your well-being, engagement,
+              and performance — through the first validated measure of positively
+              energizing leadership.
+            </p>
+
+            {/* CTA Button */}
+            <button
+              onClick={onStart}
+              style={{
+                fontFamily: sans,
+                fontSize: "16px",
+                fontWeight: 500,
+                letterSpacing: "0.08em",
+                padding: "18px 48px",
+                backgroundColor: "#C4956A",
+                color: "#1C1410",
+                border: "none",
+                borderRadius: "100px",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "#D4A57A";
+                e.currentTarget.style.transform = "translateY(-2px)";
+                e.currentTarget.style.boxShadow = "0 20px 40px rgba(196,149,106,0.3)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "#C4956A";
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
+            >
+              BEGIN YOUR ASSESSMENT &rarr;
+            </button>
+
+            <p
+              style={{
+                fontFamily: sans,
+                fontSize: "12px",
+                color: "rgba(255,255,255,0.3)",
+                marginTop: "16px",
+              }}
+            >
+              Confidential &middot; 15 minutes &middot; Immediate personalized report
             </p>
           </div>
 
-          {/* Headline */}
-          <h1
+          {/* RIGHT: Decorative logo illustration */}
+          <div
             style={{
-              fontFamily: serif,
-              fontSize: "clamp(40px, 6vw, 72px)",
-              fontWeight: 300,
-              color: "#FFFFFF",
-              textAlign: "center",
-              lineHeight: 1.1,
-              letterSpacing: "-0.02em",
-              maxWidth: "800px",
-              margin: "0 0 24px 0",
+              flex: "1 1 50%",
               position: "relative",
-              zIndex: 1,
+              display: "flex",
+              justifyContent: "flex-end",
+              alignItems: "center",
+              minHeight: "400px",
             }}
+            className="hero-illustration"
           >
-            The Leader Who
-            <br />
-            Energizes You
-            <br />
-            <span style={{ color: "#C4956A", fontStyle: "italic" }}>
-              Changes Everything
-            </span>
-          </h1>
-
-          {/* Subtitle */}
-          <p
-            style={{
-              fontFamily: sans,
-              fontSize: "18px",
-              fontWeight: 300,
-              color: "rgba(255,255,255,0.6)",
-              textAlign: "center",
-              lineHeight: 1.7,
-              maxWidth: "560px",
-              margin: "0 0 48px 0",
-              position: "relative",
-              zIndex: 1,
-            }}
-          >
-            Discover how your leader&rsquo;s energy shapes your well-being, engagement,
-            and performance — through the first validated measure of positively
-            energizing leadership.
-          </p>
-
-          {/* CTA Button */}
-          <button
-            onClick={onStart}
-            style={{
-              fontFamily: sans,
-              fontSize: "16px",
-              fontWeight: 500,
-              letterSpacing: "0.08em",
-              padding: "18px 48px",
-              backgroundColor: "#C4956A",
-              color: "#1C1410",
-              border: "none",
-              borderRadius: "100px",
-              cursor: "pointer",
-              transition: "all 0.3s ease",
-              position: "relative",
-              zIndex: 1,
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#D4A57A";
-              e.currentTarget.style.transform = "translateY(-2px)";
-              e.currentTarget.style.boxShadow = "0 20px 40px rgba(196,149,106,0.3)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "#C4956A";
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "none";
-            }}
-          >
-            BEGIN YOUR ASSESSMENT &rarr;
-          </button>
-
-          <p
-            style={{
-              fontFamily: sans,
-              fontSize: "12px",
-              color: "rgba(255,255,255,0.3)",
-              marginTop: "16px",
-              position: "relative",
-              zIndex: 1,
-            }}
-          >
-            Confidential &middot; 15 minutes &middot; Immediate personalized report
-          </p>
+            <Image
+              src="/PEL 2.png"
+              alt=""
+              width={600}
+              height={600}
+              priority
+              style={{
+                objectFit: "contain",
+                width: "auto",
+                height: "clamp(300px, 45vw, 420px)",
+                marginRight: "-60px",
+                mixBlendMode: "screen",
+                opacity: 0.9,
+              }}
+            />
+          </div>
         </div>
 
         {/* Scroll indicator */}
@@ -203,6 +227,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
             alignItems: "center",
             gap: "8px",
             opacity: 0.4,
+            zIndex: 2,
           }}
         >
           <p style={{ fontFamily: sans, fontSize: "10px", color: "#C4956A", letterSpacing: "0.15em", textTransform: "uppercase" }}>
@@ -211,6 +236,37 @@ export default function LandingPage({ onStart }: LandingPageProps) {
           <span style={{ color: "#C4956A", fontSize: "18px" }}>&#8595;</span>
         </div>
       </section>
+
+      {/* Hero responsive styles */}
+      <style>{`
+        @media (max-width: 768px) {
+          .hero-split {
+            flex-direction: column-reverse !important;
+            text-align: center !important;
+            padding: 0 24px 60px !important;
+          }
+          .hero-split > div:first-child {
+            align-items: center !important;
+          }
+          .hero-split > div:first-child h1,
+          .hero-split > div:first-child p {
+            text-align: center !important;
+          }
+          .hero-split > div:first-child > div:first-child {
+            margin-left: auto;
+            margin-right: auto;
+          }
+          .hero-illustration {
+            justify-content: center !important;
+            min-height: 240px !important;
+            margin-bottom: 20px;
+          }
+          .hero-illustration img {
+            margin-right: 0 !important;
+            height: 240px !important;
+          }
+        }
+      `}</style>
 
       {/* ─── SECTION 2: WHAT IS PEL ─── */}
       <section
