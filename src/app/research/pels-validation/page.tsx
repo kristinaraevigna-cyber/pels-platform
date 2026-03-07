@@ -256,63 +256,6 @@ export default function PelsValidationPage() {
 
           <div style={{ height: 1, background: "#EDE5D8", margin: "40px 0" }} />
 
-          {/* Two Subdomains */}
-          <h2 style={sectionHeading}>Two Subdomains</h2>
-          <p style={bodyText}>
-            The PELS consists of 18 items organized into two theoretically and empirically
-            distinct subdomains:
-          </p>
-          <div style={{ display: "flex", gap: 20, flexWrap: "wrap", marginBottom: 20 }}>
-            <div
-              style={{
-                flex: "1 1 280px",
-                background: "#FFFFFF",
-                borderRadius: 20,
-                border: "1px solid #EDE5D8",
-                padding: "28px",
-              }}
-            >
-              <p style={{ fontFamily: sans, fontSize: 13, fontWeight: 600, color: "#C4956A", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 8 }}>
-                Subdomain 1
-              </p>
-              <p style={{ fontFamily: serif, fontSize: 22, fontWeight: 400, color: "#1C1410", marginBottom: 8 }}>
-                Relational Energy
-              </p>
-              <p style={{ fontFamily: sans, fontSize: 14, fontWeight: 300, color: "#888", lineHeight: 1.7, marginBottom: 8 }}>
-                9 items measuring the degree to which a leader generates vitality,
-                enthusiasm, inspiration, and motivation in their followers.
-              </p>
-              <p style={{ fontFamily: sans, fontSize: 13, color: "#AAA", margin: 0 }}>
-                9 items
-              </p>
-            </div>
-            <div
-              style={{
-                flex: "1 1 280px",
-                background: "#FFFFFF",
-                borderRadius: 20,
-                border: "1px solid #EDE5D8",
-                padding: "28px",
-              }}
-            >
-              <p style={{ fontFamily: sans, fontSize: 13, fontWeight: 600, color: "#C4956A", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 8 }}>
-                Subdomain 2
-              </p>
-              <p style={{ fontFamily: serif, fontSize: 22, fontWeight: 400, color: "#1C1410", marginBottom: 8 }}>
-                Virtuous Behavior
-              </p>
-              <p style={{ fontFamily: sans, fontSize: 14, fontWeight: 300, color: "#888", lineHeight: 1.7, marginBottom: 8 }}>
-                9 items measuring the degree to which a leader demonstrates gratitude,
-                compassion, integrity, forgiveness, humility, kindness, generosity, and trust.
-              </p>
-              <p style={{ fontFamily: sans, fontSize: 13, color: "#AAA", margin: 0 }}>
-                9 items
-              </p>
-            </div>
-          </div>
-
-          <div style={{ height: 1, background: "#EDE5D8", margin: "40px 0" }} />
-
           {/* Criterion Validity */}
           <h2 style={sectionHeading}>
             Criterion{" "}
