@@ -9,7 +9,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "24px",
+        padding: "16px",
         fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
       }}
     >
@@ -32,7 +32,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
             width={260}
             height={260}
             priority
-            style={{ objectFit: "contain", maxHeight: "220px", mixBlendMode: "multiply" }}
+            style={{ objectFit: "contain", maxHeight: "180px", maxWidth: "100%", mixBlendMode: "multiply" }}
           />
         </div>
 
