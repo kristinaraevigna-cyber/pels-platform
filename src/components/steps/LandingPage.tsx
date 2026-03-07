@@ -555,20 +555,35 @@ export default function LandingPage({ onStart }: LandingPageProps) {
             Rigorously developed.{" "}
             <span style={{ fontStyle: "italic", color: "#8B6F5E" }}>Empirically validated.</span>
           </h2>
+          <p
+            style={{
+              fontFamily: sans,
+              fontSize: "16px",
+              fontWeight: 300,
+              color: "#888",
+              lineHeight: 1.7,
+              maxWidth: "640px",
+              margin: "0 auto",
+            }}
+          >
+            Developed over three years in collaboration with academics and organizational
+            researchers, the PELS is the first validated measure of positively energizing leadership.
+          </p>
           {/* Research details */}
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+              gridTemplateColumns: "repeat(3, 1fr)",
               gap: "24px",
               marginTop: "56px",
+              maxWidth: "750px",
+              margin: "56px auto 0",
             }}
           >
             {[
+              { value: "3 Years", label: "In Development" },
               { value: "603", label: "Participants" },
               { value: "18", label: "Validated Items" },
-              { value: "2", label: "Subdomains" },
-              { value: "15 min", label: "Completion Time" },
             ].map(({ value, label }) => (
               <div
                 key={label}
