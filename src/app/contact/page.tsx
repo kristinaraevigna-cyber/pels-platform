@@ -62,7 +62,7 @@ export default function ContactPage() {
           backdropFilter: "blur(12px)",
         }}
       >
-        {["Home", "About", "Contact"].map((label) => {
+        {["Home", "About", "Research", "Contact"].map((label) => {
           const href = label === "Home" ? "/" : `/${label.toLowerCase()}`;
           return (
             <a

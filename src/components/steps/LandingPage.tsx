@@ -39,7 +39,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
             gap: 24,
           }}
         >
-          {["Home", "About", "Contact"].map((label) => {
+          {["Home", "About", "Research", "Contact"].map((label) => {
             const href = label === "Home" ? "/" : `/${label.toLowerCase()}`;
             return (
               <a
