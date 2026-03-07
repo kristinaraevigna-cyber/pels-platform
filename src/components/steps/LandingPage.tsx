@@ -224,34 +224,6 @@ export default function LandingPage({ onStart }: LandingPageProps) {
         </div>
       </section>
 
-      {/* Hero responsive styles */}
-      <style>{`
-        @media (max-width: 768px) {
-          .hero-split {
-            flex-direction: column !important;
-            text-align: center !important;
-            padding: 0 24px 40px !important;
-          }
-          .hero-split > div:first-child h1,
-          .hero-split > div:first-child p {
-            text-align: center !important;
-          }
-          .hero-split > div:first-child > div:first-child {
-            margin-left: auto;
-            margin-right: auto;
-          }
-          .hero-illustration {
-            justify-content: center !important;
-            min-height: 220px !important;
-            margin-bottom: 0 !important;
-            order: 2;
-          }
-          .hero-illustration img {
-            margin-right: 0 !important;
-            height: 260px !important;
-          }
-        }
-      `}</style>
 
       {/* ─── SECTION 2: WHAT IS PEL ─── */}
       <section
@@ -365,10 +337,10 @@ export default function LandingPage({ onStart }: LandingPageProps) {
                   border: "1px solid #EDE5D8",
                 }}
               >
-                <p style={{ fontFamily: sans, fontSize: "13px", fontWeight: 600, color: "#8B6F5E", marginBottom: "6px" }}>
+                <p style={{ fontFamily: sans, fontSize: "13px", fontWeight: 600, color: "#8B6F5E", marginBottom: "6px", textAlign: "center" }}>
                   Relational Energy
                 </p>
-                <p style={{ fontFamily: sans, fontSize: "13px", fontWeight: 300, color: "#888", lineHeight: 1.6 }}>
+                <p style={{ fontFamily: sans, fontSize: "13px", fontWeight: 300, color: "#888", lineHeight: 1.6, textAlign: "center" }}>
                   A surge of psychological resourcefulness that an individual experiences through interaction with another person, which increases their capacities — their motivation, vitality, and ability to perform.
                 </p>
               </div>
@@ -381,10 +353,10 @@ export default function LandingPage({ onStart }: LandingPageProps) {
                   border: "1px solid #EDE5D8",
                 }}
               >
-                <p style={{ fontFamily: sans, fontSize: "13px", fontWeight: 600, color: "#8B6F5E", marginBottom: "6px" }}>
+                <p style={{ fontFamily: sans, fontSize: "13px", fontWeight: 600, color: "#8B6F5E", marginBottom: "6px", textAlign: "center" }}>
                   Virtuous Behavior
                 </p>
-                <p style={{ fontFamily: sans, fontSize: "13px", fontWeight: 300, color: "#888", lineHeight: 1.6 }}>
+                <p style={{ fontFamily: sans, fontSize: "13px", fontWeight: 300, color: "#888", lineHeight: 1.6, textAlign: "center" }}>
                   Behaviors reflecting the highest aspirations to which human beings aspire — compassion, integrity, forgiveness, gratitude, and trust — that are intrinsically valued and naturally draw people toward the leader who embodies them.
                 </p>
               </div>
@@ -592,6 +564,11 @@ export default function LandingPage({ onStart }: LandingPageProps) {
                   borderRadius: "20px",
                   backgroundColor: "#FFFFFF",
                   border: "1px solid #EDE5D8",
+                  textAlign: "center",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
                 <p
