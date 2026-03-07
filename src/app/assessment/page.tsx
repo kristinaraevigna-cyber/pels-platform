@@ -34,25 +34,26 @@ export default function AssessmentFlowPage() {
     <div className="min-h-screen bg-[#F7F3EE]" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-stone-200">
-        <div className="max-w-3xl mx-auto px-6 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             <Image
               src="/PEL 2.png"
               alt="Positively Energizing Leadership"
               width={160}
               height={48}
+              className="hidden sm:block"
               style={{ objectFit: "contain", maxHeight: "40px", mixBlendMode: "multiply" }}
             />
-            <div>
-              <p className="text-xs font-sans tracking-[0.2em] uppercase text-stone-400 font-medium">
+            <div className="min-w-0">
+              <p className="text-[10px] sm:text-xs font-sans tracking-[0.2em] uppercase text-stone-400 font-medium">
                 PEL Assessment
               </p>
-              <p className="text-sm text-stone-700 font-medium">
+              <p className="text-sm text-stone-700 font-medium truncate">
                 {STEP_LABELS[stepIndex]}
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
             <div className="hidden sm:flex items-center gap-2">
               {STEPS.map((s, i) => (
                 <div
@@ -67,7 +68,7 @@ export default function AssessmentFlowPage() {
                 />
               ))}
             </div>
-            <span className="text-xs font-sans text-stone-400">
+            <span className="text-xs font-sans text-stone-400 whitespace-nowrap">
               {step !== "results" ? `${stepIndex + 1} of ${STEPS.length}` : "Complete"}
             </span>
           </div>

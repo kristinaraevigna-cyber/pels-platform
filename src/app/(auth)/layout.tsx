@@ -14,6 +14,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       }}
     >
       <div
+        className="auth-card"
         style={{
           width: "100%",
           maxWidth: "440px",

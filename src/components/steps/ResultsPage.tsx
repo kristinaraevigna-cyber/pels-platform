@@ -78,7 +78,7 @@ export default function ResultsPage({ data, assessmentId }: ResultsPageProps) {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-12">
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
       {/* Hero score section */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -91,7 +91,7 @@ export default function ResultsPage({ data, assessmentId }: ResultsPageProps) {
         >
           Your Results
         </p>
-        <h2 className="text-5xl text-stone-800 mb-2" style={{ fontWeight: 300 }}>
+        <h2 className="text-3xl sm:text-5xl text-stone-800 mb-2" style={{ fontWeight: 300 }}>
           {data.respondent_name
             ? `${data.respondent_name.split(" ")[0]}'s`
             : "Your"}{" "}
@@ -104,10 +104,10 @@ export default function ResultsPage({ data, assessmentId }: ResultsPageProps) {
         initial={{ opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.15 }}
-        className={`rounded-3xl border-2 p-8 mb-10 text-center ${score.bgColor}`}
+        className={`rounded-3xl border-2 p-5 sm:p-8 mb-8 sm:mb-10 text-center ${score.bgColor}`}
       >
         <div className="flex justify-center items-end gap-3 mb-3">
-          <span className={`text-8xl ${score.color}`} style={{ fontWeight: 200, lineHeight: 1, letterSpacing: "-0.04em" }}>
+          <span className={`text-6xl sm:text-8xl ${score.color} results-score-value`} style={{ fontWeight: 200, lineHeight: 1, letterSpacing: "-0.04em" }}>
             {score.mean.toFixed(1)}
           </span>
           <span className="text-stone-400 text-2xl mb-3" style={{ fontFamily: "sans-serif" }}>
@@ -213,13 +213,13 @@ export default function ResultsPage({ data, assessmentId }: ResultsPageProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.45 }}
-        className="bg-white rounded-3xl border border-stone-200 p-8 mb-10"
+        className="bg-white rounded-3xl border border-stone-200 p-4 sm:p-8 mb-8 sm:mb-10"
       >
-        <h3 className="text-xl text-stone-800 mb-2">Leadership Attribute Profile</h3>
-        <p className="text-sm text-stone-500 mb-6" style={{ fontFamily: "sans-serif" }}>
+        <h3 className="text-lg sm:text-xl text-stone-800 mb-2">Leadership Attribute Profile</h3>
+        <p className="text-sm text-stone-500 mb-4 sm:mb-6" style={{ fontFamily: "sans-serif" }}>
           Your scores across all 18 PELS attributes
         </p>
-        <div className="h-80">
+        <div className="results-chart-container h-64 sm:h-80">
           <ResponsiveContainer width="100%" height="100%">
             <RadarChart data={radarData}>
               <PolarGrid stroke="#E5E7EB" />
@@ -249,7 +249,7 @@ export default function ResultsPage({ data, assessmentId }: ResultsPageProps) {
           className="mb-10"
         >
           <div className="mb-6">
-            <h3 className="text-3xl text-stone-800 mb-2" style={{ fontWeight: 300 }}>
+            <h3 className="text-2xl sm:text-3xl text-stone-800 mb-2" style={{ fontWeight: 300 }}>
               Your Workplace Well-Being Profile
             </h3>
             <p className="text-stone-500 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
@@ -260,8 +260,8 @@ export default function ResultsPage({ data, assessmentId }: ResultsPageProps) {
           </div>
 
           {/* Bar chart */}
-          <div className="bg-white rounded-3xl border border-stone-200 p-8 mb-6">
-            <div className="h-72">
+          <div className="bg-white rounded-3xl border border-stone-200 p-4 sm:p-8 mb-6">
+            <div className="results-chart-container h-64 sm:h-72">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart
                   data={PERMA_SUBSCALES.map((sub) => ({
@@ -409,7 +409,7 @@ export default function ResultsPage({ data, assessmentId }: ResultsPageProps) {
         className="mb-10"
       >
         <div className="mb-6">
-          <h3 className="text-3xl text-stone-800 mb-2" style={{ fontWeight: 300 }}>
+          <h3 className="text-2xl sm:text-3xl text-stone-800 mb-2" style={{ fontWeight: 300 }}>
             Evidence-Based Practices for You
           </h3>
           <p className="text-stone-500 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
@@ -442,7 +442,7 @@ export default function ResultsPage({ data, assessmentId }: ResultsPageProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.75 }}
-        className="text-center bg-gradient-to-br from-[#8B6F5E] to-[#6B5249] rounded-3xl p-10 text-white"
+        className="text-center bg-gradient-to-br from-[#8B6F5E] to-[#6B5249] rounded-3xl p-6 sm:p-10 text-white"
       >
         <p className="text-4xl mb-3">📄</p>
         <h3 className="text-2xl mb-3" style={{ fontWeight: 300 }}>
@@ -491,7 +491,7 @@ function InterventionCard({
     >
       <button
         onClick={onToggle}
-        className="w-full text-left px-6 py-5 flex items-start gap-4 hover:bg-stone-50 transition-colors"
+        className="w-full text-left px-4 sm:px-6 py-5 flex items-start gap-3 sm:gap-4 hover:bg-stone-50 transition-colors"
       >
         <span className="text-2xl flex-shrink-0 mt-0.5">{intervention.icon}</span>
         <div className="flex-1 min-w-0">
@@ -527,7 +527,7 @@ function InterventionCard({
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className="overflow-hidden"
       >
-        <div className="px-6 pb-6 space-y-4 ml-10">
+        <div className="px-4 sm:px-6 pb-6 space-y-4 sm:ml-10 intervention-expanded">
           <div>
             <p className="text-xs uppercase tracking-widest text-[#8B6F5E] mb-2" style={{ fontFamily: "sans-serif", fontWeight: 600 }}>
               What It Is

@@ -50,14 +50,14 @@ export default function PermaPage({
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-12">
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
       {/* Header */}
       <div className="text-center mb-12">
-        <h2 className="text-4xl text-stone-800 mb-3" style={{ fontWeight: 300 }}>
+        <h2 className="text-3xl sm:text-4xl text-stone-800 mb-3" style={{ fontWeight: 300 }}>
           Workplace Well-Being Profile
         </h2>
         <p
-          className="text-stone-500 text-lg mb-2"
+          className="text-stone-500 text-base sm:text-lg mb-2"
           style={{ fontFamily: "sans-serif", fontWeight: 300 }}
         >
           The PERMA+4 scale measures 9 dimensions of well-being at work.
@@ -81,7 +81,7 @@ export default function PermaPage({
       </div>
 
       {/* Scale reminder */}
-      <div className="bg-stone-50 rounded-2xl px-6 py-4 mb-8 border border-stone-200">
+      <div className="bg-stone-50 rounded-2xl px-4 sm:px-6 py-4 mb-8 border border-stone-200">
         <p
           className="text-xs text-stone-500 text-center mb-3"
           style={{
@@ -98,12 +98,12 @@ export default function PermaPage({
           style={{ fontFamily: "sans-serif" }}
         >
           <span>1 = Strongly Disagree</span>
-          <span>4 = Neutral</span>
+          <span className="hidden sm:inline">4 = Neutral</span>
           <span>7 = Strongly Agree</span>
         </div>
         <div className="flex justify-between mt-1.5">
           {[1, 2, 3, 4, 5, 6, 7].map((v) => (
-            <div key={v} className="w-8 h-1 rounded-full bg-stone-200" />
+            <div key={v} className="w-6 sm:w-8 h-1 rounded-full bg-stone-200" />
           ))}
         </div>
       </div>
@@ -148,7 +148,7 @@ export default function PermaPage({
                       initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: item.id * 0.02 }}
-                      className={`rounded-2xl border p-6 transition-all duration-200 ${
+                      className={`rounded-2xl border p-4 sm:p-6 transition-all duration-200 ${
                         unanswered
                           ? "border-rose-200 bg-rose-50"
                           : selected
@@ -170,13 +170,13 @@ export default function PermaPage({
                       </div>
 
                       {/* 1–7 Likert buttons */}
-                      <div className="ml-10">
-                        <div className="grid grid-cols-7 gap-1.5">
+                      <div className="sm:ml-10">
+                        <div className="perma-likert-grid grid grid-cols-7 gap-1 sm:gap-1.5">
                           {[1, 2, 3, 4, 5, 6, 7].map((value) => (
                             <button
                               key={value}
                               onClick={() => setResponse(item.id, value)}
-                              className={`flex items-center justify-center py-2.5 rounded-xl border text-xs
+                              className={`flex items-center justify-center min-h-[44px] py-2.5 rounded-xl border text-xs
                                 transition-all duration-150 cursor-pointer
                                 ${
                                   selected === value
@@ -194,13 +194,13 @@ export default function PermaPage({
                         </div>
                         <div className="flex justify-between mt-2 px-1">
                           <span
-                            className="text-xs text-stone-400"
+                            className="text-[10px] sm:text-xs text-stone-400"
                             style={{ fontFamily: "sans-serif" }}
                           >
                             Strongly Disagree
                           </span>
                           <span
-                            className="text-xs text-stone-400"
+                            className="text-[10px] sm:text-xs text-stone-400"
                             style={{ fontFamily: "sans-serif" }}
                           >
                             Strongly Agree
@@ -227,17 +227,17 @@ export default function PermaPage({
             {total - answered !== 1 ? "s" : ""} remaining.
           </p>
         )}
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
           <button
             onClick={onBack}
-            className="px-6 py-3 rounded-full border border-stone-200 text-stone-600 text-sm hover:bg-stone-50 transition-colors"
+            className="px-6 py-3 min-h-[44px] rounded-full border border-stone-200 text-stone-600 text-sm hover:bg-stone-50 transition-colors"
             style={{ fontFamily: "sans-serif" }}
           >
             &larr; Back
           </button>
           <button
             onClick={handleContinue}
-            className={`flex-1 py-4 rounded-full text-white text-lg transition-all duration-200
+            className={`flex-1 py-4 min-h-[44px] rounded-full text-white text-base sm:text-lg transition-all duration-200
               ${
                 allAnswered
                   ? "bg-[#8B6F5E] hover:bg-[#7A6050] hover:shadow-lg cursor-pointer"

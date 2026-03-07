@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Navbar from "@/components/Navbar";
 
 interface LandingPageProps {
   onStart: () => void;
@@ -25,70 +26,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
         }}
       >
         {/* Navbar */}
-        <nav
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            zIndex: 20,
-            display: "flex",
-            justifyContent: "flex-end",
-            alignItems: "center",
-            padding: "16px 32px",
-            gap: 24,
-          }}
-        >
-          {["Home", "About", "Research", "Contact"].map((label) => {
-            const href = label === "Home" ? "/" : `/${label.toLowerCase()}`;
-            return (
-              <a
-                key={label}
-                href={href}
-                style={{
-                  fontFamily: sans,
-                  color: "rgba(255,255,255,0.7)",
-                  fontSize: "11px",
-                  fontWeight: 600,
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  textDecoration: "none",
-                  transition: "color 0.2s ease",
-                }}
-                onMouseOver={(e) => { e.currentTarget.style.color = "#C4956A"; }}
-                onMouseOut={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.7)"; }}
-              >
-                {label}
-              </a>
-            );
-          })}
-          <a
-            href="/signup"
-            style={{
-              fontFamily: sans,
-              background: "#C4956A",
-              color: "#1C1410",
-              fontSize: "11px",
-              fontWeight: 600,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              textDecoration: "none",
-              padding: "8px 20px",
-              borderRadius: "100px",
-              transition: "all 0.3s ease",
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.background = "#D4A57A";
-              e.currentTarget.style.transform = "translateY(-1px)";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.background = "#C4956A";
-              e.currentTarget.style.transform = "translateY(0)";
-            }}
-          >
-            Begin Assessment
-          </a>
-        </nav>
+        <Navbar variant="transparent" />
 
         {/* Radial glow behind illustration */}
         <div
@@ -113,7 +51,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
             maxWidth: "1200px",
             margin: "0 auto",
             width: "100%",
-            padding: "40px 40px",
+            padding: "80px 40px 40px",
           }}
           className="hero-split"
         >
@@ -149,7 +87,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
             <h1
               style={{
                 fontFamily: serif,
-                fontSize: "clamp(36px, 5vw, 68px)",
+                fontSize: "clamp(32px, 5vw, 68px)",
                 fontWeight: 300,
                 color: "#FFFFFF",
                 textAlign: "left",
@@ -171,7 +109,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
             <p
               style={{
                 fontFamily: sans,
-                fontSize: "17px",
+                fontSize: "clamp(14px, 2vw, 17px)",
                 fontWeight: 300,
                 color: "rgba(255,255,255,0.55)",
                 textAlign: "left",
@@ -188,6 +126,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
             {/* CTA Button */}
             <button
               onClick={onStart}
+              className="cta-button-mobile"
               style={{
                 fontFamily: sans,
                 fontSize: "16px",
@@ -261,12 +200,12 @@ export default function LandingPage({ onStart }: LandingPageProps) {
 
         {/* Scroll indicator */}
         <div
+          className="hidden sm:flex"
           style={{
             position: "absolute",
             bottom: "32px",
             left: "50%",
             transform: "translateX(-50%)",
-            display: "flex",
             flexDirection: "column",
             alignItems: "center",
             gap: "8px",
@@ -284,9 +223,10 @@ export default function LandingPage({ onStart }: LandingPageProps) {
 
       {/* ─── SECTION 2: WHAT IS PEL ─── */}
       <section
+        className="section-padding"
         style={{
           backgroundColor: "#FFFFFF",
-          padding: "120px 24px",
+          padding: "80px 24px",
         }}
       >
         <div
@@ -295,12 +235,12 @@ export default function LandingPage({ onStart }: LandingPageProps) {
             margin: "0 auto",
             display: "flex",
             flexWrap: "wrap",
-            gap: "64px",
+            gap: "48px",
             alignItems: "center",
           }}
         >
           {/* Left: Unsplash photo */}
-          <div style={{ flex: "1 1 400px", minWidth: "300px" }}>
+          <div style={{ flex: "1 1 400px", minWidth: "280px" }}>
             <div
               style={{
                 width: "100%",
@@ -321,7 +261,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
           </div>
 
           {/* Right: Text */}
-          <div style={{ flex: "1 1 400px", minWidth: "300px" }}>
+          <div style={{ flex: "1 1 400px", minWidth: "280px" }}>
             <p
               style={{
                 fontFamily: sans,
@@ -338,7 +278,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
             <h2
               style={{
                 fontFamily: serif,
-                fontSize: "40px",
+                fontSize: "clamp(28px, 4vw, 40px)",
                 fontWeight: 300,
                 color: "#1C1410",
                 lineHeight: 1.15,
@@ -355,7 +295,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
             <p
               style={{
                 fontFamily: sans,
-                fontSize: "16px",
+                fontSize: "clamp(14px, 2vw, 16px)",
                 fontWeight: 300,
                 color: "#666",
                 lineHeight: 1.8,
@@ -370,7 +310,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
             <p
               style={{
                 fontFamily: sans,
-                fontSize: "16px",
+                fontSize: "clamp(14px, 2vw, 16px)",
                 fontWeight: 300,
                 color: "#666",
                 lineHeight: 1.8,
@@ -384,7 +324,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
             </p>
 
             {/* Two pillars */}
-            <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", justifyContent: "center" }}>
+            <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
               <div
                 style={{
                   flex: "1 1 200px",
@@ -424,9 +364,10 @@ export default function LandingPage({ onStart }: LandingPageProps) {
 
       {/* ─── SECTION 3: WHY IT MATTERS ─── */}
       <section
+        className="section-padding"
         style={{
           background: "linear-gradient(165deg, #1C1410 0%, #2C2420 100%)",
-          padding: "120px 24px",
+          padding: "80px 24px",
         }}
       >
         <div style={{ maxWidth: "1000px", margin: "0 auto", textAlign: "center" }}>
@@ -446,7 +387,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
           <h2
             style={{
               fontFamily: serif,
-              fontSize: "44px",
+              fontSize: "clamp(28px, 5vw, 44px)",
               fontWeight: 300,
               color: "#FFFFFF",
               lineHeight: 1.15,
@@ -459,12 +400,12 @@ export default function LandingPage({ onStart }: LandingPageProps) {
           <p
             style={{
               fontFamily: sans,
-              fontSize: "16px",
+              fontSize: "clamp(14px, 2vw, 16px)",
               fontWeight: 300,
               color: "rgba(255,255,255,0.5)",
               lineHeight: 1.7,
               maxWidth: "600px",
-              margin: "0 auto 64px",
+              margin: "0 auto 48px",
             }}
           >
             Positively energizing leadership is one of the strongest predictors of
@@ -475,8 +416,8 @@ export default function LandingPage({ onStart }: LandingPageProps) {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-              gap: "24px",
+              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              gap: "20px",
             }}
           >
             {[
@@ -504,7 +445,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
               <div
                 key={title}
                 style={{
-                  padding: "36px 28px",
+                  padding: "32px 24px",
                   borderRadius: "20px",
                   border: "1px solid rgba(196,149,106,0.15)",
                   backgroundColor: "rgba(196,149,106,0.04)",
@@ -552,9 +493,10 @@ export default function LandingPage({ onStart }: LandingPageProps) {
 
       {/* ─── SECTION 4: THE RESEARCH ─── */}
       <section
+        className="section-padding"
         style={{
           backgroundColor: "#F7F3EE",
-          padding: "120px 24px",
+          padding: "80px 24px",
         }}
       >
         <div style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center" }}>
@@ -574,7 +516,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
           <h2
             style={{
               fontFamily: serif,
-              fontSize: "44px",
+              fontSize: "clamp(28px, 5vw, 44px)",
               fontWeight: 300,
               color: "#1C1410",
               lineHeight: 1.15,
@@ -587,7 +529,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
           <p
             style={{
               fontFamily: sans,
-              fontSize: "16px",
+              fontSize: "clamp(14px, 2vw, 16px)",
               fontWeight: 300,
               color: "#888",
               lineHeight: 1.7,
@@ -600,13 +542,14 @@ export default function LandingPage({ onStart }: LandingPageProps) {
           </p>
           {/* Research details */}
           <div
+            className="stats-grid"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(3, 1fr)",
-              gap: "24px",
-              marginTop: "56px",
+              gap: "20px",
+              marginTop: "48px",
               maxWidth: "750px",
-              margin: "56px auto 0",
+              margin: "48px auto 0",
             }}
           >
             {[
@@ -617,7 +560,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
               <div
                 key={label}
                 style={{
-                  padding: "32px 20px",
+                  padding: "28px 16px",
                   borderRadius: "20px",
                   backgroundColor: "#FFFFFF",
                   border: "1px solid #EDE5D8",
@@ -631,7 +574,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
                 <p
                   style={{
                     fontFamily: serif,
-                    fontSize: "48px",
+                    fontSize: "clamp(32px, 5vw, 48px)",
                     fontWeight: 300,
                     color: "#8B6F5E",
                     letterSpacing: "-0.02em",
@@ -661,9 +604,10 @@ export default function LandingPage({ onStart }: LandingPageProps) {
 
       {/* ─── SECTION 5: HOW IT WORKS ─── */}
       <section
+        className="section-padding"
         style={{
           backgroundColor: "#FFFFFF",
-          padding: "120px 24px",
+          padding: "80px 24px",
         }}
       >
         <div style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center" }}>
@@ -683,11 +627,11 @@ export default function LandingPage({ onStart }: LandingPageProps) {
           <h2
             style={{
               fontFamily: serif,
-              fontSize: "44px",
+              fontSize: "clamp(28px, 5vw, 44px)",
               fontWeight: 300,
               color: "#1C1410",
               lineHeight: 1.15,
-              marginBottom: "56px",
+              marginBottom: "48px",
             }}
           >
             Four steps to{" "}
@@ -698,7 +642,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-              gap: "32px",
+              gap: "24px",
             }}
           >
             {[
@@ -762,7 +706,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
               <div
                 key={step}
                 style={{
-                  padding: "36px 24px",
+                  padding: "32px 20px",
                   borderRadius: "24px",
                   border: "1px solid #EDE5D8",
                   backgroundColor: "#FAFAF8",
@@ -826,9 +770,10 @@ export default function LandingPage({ onStart }: LandingPageProps) {
 
       {/* ─── SECTION 6: FINAL CTA ─── */}
       <section
+        className="section-padding"
         style={{
           background: "linear-gradient(165deg, #C4956A 0%, #8B6F5E 100%)",
-          padding: "120px 24px",
+          padding: "80px 24px",
           textAlign: "center",
         }}
       >
@@ -836,7 +781,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
           <h2
             style={{
               fontFamily: serif,
-              fontSize: "44px",
+              fontSize: "clamp(28px, 5vw, 44px)",
               fontWeight: 300,
               color: "#FFFFFF",
               lineHeight: 1.15,
@@ -850,7 +795,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
           <p
             style={{
               fontFamily: sans,
-              fontSize: "16px",
+              fontSize: "clamp(14px, 2vw, 16px)",
               fontWeight: 300,
               color: "rgba(255,255,255,0.75)",
               lineHeight: 1.7,
@@ -862,6 +807,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
           </p>
           <button
             onClick={onStart}
+            className="cta-button-mobile"
             style={{
               fontFamily: sans,
               fontSize: "16px",

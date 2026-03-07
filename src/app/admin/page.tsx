@@ -77,7 +77,7 @@ export default function AdminPage() {
   if (!authenticated) {
     return (
       <div className="min-h-screen bg-clay-50 flex items-center justify-center p-6 font-sans">
-        <div className="bg-white rounded-xl shadow-lg shadow-stone-200/50 px-10 py-12 max-w-sm w-full">
+        <div className="bg-white rounded-xl shadow-lg shadow-stone-200/50 px-6 sm:px-10 py-10 sm:py-12 max-w-sm w-full">
           <div className="flex justify-center mb-6">
             <Image
               src="/PEL 2.png"
@@ -121,17 +121,17 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-clay-50 p-10 font-sans">
+    <div className="min-h-screen bg-clay-50 px-4 sm:px-6 py-8 sm:p-10 font-sans">
       <div className="max-w-3xl mx-auto">
-        <h1 className="font-serif text-4xl text-stone-800 mb-2">
+        <h1 className="font-serif text-3xl sm:text-4xl text-stone-800 mb-2">
           Access Code Management
         </h1>
-        <p className="text-stone-500 mb-10">
+        <p className="text-stone-500 mb-8 sm:mb-10">
           Generate secure, hashed access codes for academic cohorts.
         </p>
 
         {/* Generate section */}
-        <div className="bg-white rounded-xl p-8 mb-8 shadow-sm">
+        <div className="bg-white rounded-xl p-5 sm:p-8 mb-8 shadow-sm">
           <h2 className="text-lg font-semibold text-stone-800 mb-5">
             Generate New Codes
           </h2>
@@ -201,7 +201,7 @@ export default function AdminPage() {
 
         {/* Generated codes display */}
         {codes.length > 0 && (
-          <div className="bg-white rounded-xl p-8 shadow-sm">
+          <div className="bg-white rounded-xl p-5 sm:p-8 shadow-sm">
             <div className="flex items-center justify-between mb-5">
               <h2 className="text-lg font-semibold text-stone-800">
                 Generated Codes ({codes.length})

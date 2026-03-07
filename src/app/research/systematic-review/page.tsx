@@ -1,4 +1,5 @@
 "use client";
+import Navbar from "@/components/Navbar";
 
 const serif = "'Cormorant Garamond', Georgia, serif";
 const sans = "'Inter', system-ui, -apple-system, sans-serif";
@@ -26,75 +27,11 @@ export default function SystematicReviewPage() {
     <div style={{ overflowX: "hidden" }}>
 
       {/* ─── NAVBAR ─── */}
-      <nav
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 50,
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center",
-          padding: "16px 32px",
-          gap: 24,
-          background: "rgba(28,20,16,0.6)",
-          backdropFilter: "blur(12px)",
-        }}
-      >
-        {["Home", "About", "Research", "Contact"].map((label) => {
-          const href = label === "Home" ? "/" : `/${label.toLowerCase()}`;
-          return (
-            <a
-              key={label}
-              href={href}
-              style={{
-                fontFamily: sans,
-                color: "rgba(255,255,255,0.7)",
-                fontSize: 11,
-                fontWeight: 600,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                textDecoration: "none",
-                transition: "color 0.2s ease",
-              }}
-              onMouseOver={(e) => { e.currentTarget.style.color = "#C4956A"; }}
-              onMouseOut={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.7)"; }}
-            >
-              {label}
-            </a>
-          );
-        })}
-        <a
-          href="/signup"
-          style={{
-            fontFamily: sans,
-            background: "#C4956A",
-            color: "#1C1410",
-            fontSize: 11,
-            fontWeight: 600,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            textDecoration: "none",
-            padding: "8px 20px",
-            borderRadius: 100,
-            transition: "all 0.3s ease",
-          }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.background = "#D4A57A";
-            e.currentTarget.style.transform = "translateY(-1px)";
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.background = "#C4956A";
-            e.currentTarget.style.transform = "translateY(0)";
-          }}
-        >
-          Begin Assessment
-        </a>
-      </nav>
+      <Navbar variant="fixed" />
 
       {/* ─── HERO ─── */}
       <section
+        className="section-padding"
         style={{
           background: "linear-gradient(165deg, #1C1410 0%, #2C2420 40%, #1C1410 100%)",
           minHeight: 400,
@@ -173,7 +110,7 @@ export default function SystematicReviewPage() {
       </section>
 
       {/* ─── CONTENT ─── */}
-      <section style={{ backgroundColor: "#F7F3EE", padding: "80px 24px" }}>
+      <section className="section-padding" style={{ backgroundColor: "#F7F3EE", padding: "60px 24px" }}>
         <div style={{ maxWidth: 760, margin: "0 auto" }}>
 
           {/* Back link */}
@@ -260,7 +197,7 @@ export default function SystematicReviewPage() {
               background: "#FFFFFF",
               borderRadius: 20,
               border: "1px solid #EDE5D8",
-              padding: "40px 32px",
+              padding: "40px 24px",
               textAlign: "center",
               marginBottom: 40,
             }}
@@ -379,7 +316,7 @@ export default function SystematicReviewPage() {
               background: "#FFFFFF",
               borderRadius: 16,
               border: "1px solid #EDE5D8",
-              padding: "28px 32px",
+              padding: "28px 24px",
             }}
           >
             <p style={{ fontFamily: sans, fontSize: 12, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "#C4956A", marginBottom: 12 }}>

@@ -1,5 +1,7 @@
 "use client";
 
+import Navbar from "@/components/Navbar";
+
 const serif = "'Cormorant Garamond', Georgia, serif";
 const sans = "'Inter', system-ui, -apple-system, sans-serif";
 
@@ -8,75 +10,11 @@ export default function AboutPage() {
     <div style={{ overflowX: "hidden" }}>
 
       {/* ─── NAVBAR ─── */}
-      <nav
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 50,
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center",
-          padding: "16px 32px",
-          gap: 24,
-          background: "rgba(28,20,16,0.6)",
-          backdropFilter: "blur(12px)",
-        }}
-      >
-        {["Home", "About", "Research", "Contact"].map((label) => {
-          const href = label === "Home" ? "/" : `/${label.toLowerCase()}`;
-          return (
-            <a
-              key={label}
-              href={href}
-              style={{
-                fontFamily: sans,
-                color: "rgba(255,255,255,0.7)",
-                fontSize: 11,
-                fontWeight: 600,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                textDecoration: "none",
-                transition: "color 0.2s ease",
-              }}
-              onMouseOver={(e) => { e.currentTarget.style.color = "#C4956A"; }}
-              onMouseOut={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.7)"; }}
-            >
-              {label}
-            </a>
-          );
-        })}
-        <a
-          href="/signup"
-          style={{
-            fontFamily: sans,
-            background: "#C4956A",
-            color: "#1C1410",
-            fontSize: 11,
-            fontWeight: 600,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            textDecoration: "none",
-            padding: "8px 20px",
-            borderRadius: 100,
-            transition: "all 0.3s ease",
-          }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.background = "#D4A57A";
-            e.currentTarget.style.transform = "translateY(-1px)";
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.background = "#C4956A";
-            e.currentTarget.style.transform = "translateY(0)";
-          }}
-        >
-          Begin Assessment
-        </a>
-      </nav>
+      <Navbar variant="fixed" />
 
       {/* ─── HERO BANNER ─── */}
       <section
+        className="section-padding"
         style={{
           background: "linear-gradient(165deg, #1C1410 0%, #2C2420 40%, #1C1410 100%)",
           minHeight: 400,
@@ -118,7 +56,7 @@ export default function AboutPage() {
             style={{
               fontFamily: serif,
               color: "#FFFFFF",
-              fontSize: "clamp(32px, 4vw, 52px)",
+              fontSize: "clamp(28px, 4vw, 52px)",
               fontWeight: 300,
               lineHeight: 1.15,
               letterSpacing: "-0.02em",
@@ -132,7 +70,7 @@ export default function AboutPage() {
             style={{
               fontFamily: sans,
               color: "rgba(255,255,255,0.5)",
-              fontSize: 16,
+              fontSize: "clamp(14px, 2vw, 16px)",
               lineHeight: 1.7,
               fontWeight: 300,
               maxWidth: 560,
@@ -146,8 +84,9 @@ export default function AboutPage() {
       </section>
 
       {/* ─── TEAM CARD ─── */}
-      <section style={{ backgroundColor: "#F7F3EE", padding: "80px 24px" }}>
+      <section className="section-padding" style={{ backgroundColor: "#F7F3EE", padding: "80px 24px" }}>
         <div
+          className="team-card"
           style={{
             maxWidth: 1000,
             margin: "0 auto",
@@ -163,6 +102,7 @@ export default function AboutPage() {
         >
           {/* Photo */}
           <div
+            className="team-card-photo"
             style={{
               flex: "0 0 320px",
               minHeight: 400,
@@ -180,8 +120,10 @@ export default function AboutPage() {
               width={280}
               height={280}
               style={{
-                width: 280,
-                height: 280,
+                width: "100%",
+                maxWidth: 280,
+                height: "auto",
+                aspectRatio: "1",
                 borderRadius: 20,
                 objectFit: "cover",
                 boxShadow: "0 12px 40px rgba(0,0,0,0.1)",
@@ -191,7 +133,7 @@ export default function AboutPage() {
           </div>
 
           {/* Bio */}
-          <div style={{ padding: "48px", flex: "1 1 340px" }}>
+          <div className="team-card-bio" style={{ padding: "48px", flex: "1 1 340px" }}>
             <p
               style={{
                 fontFamily: sans,
@@ -208,7 +150,7 @@ export default function AboutPage() {
             <h2
               style={{
                 fontFamily: serif,
-                fontSize: 36,
+                fontSize: "clamp(28px, 3vw, 36px)",
                 fontWeight: 400,
                 color: "#1C1410",
                 marginBottom: 6,
@@ -256,93 +198,34 @@ export default function AboutPage() {
             </div>
 
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              <p
-                style={{
-                  fontFamily: sans,
-                  fontSize: 15,
-                  lineHeight: 1.85,
-                  color: "#666",
-                  fontWeight: 300,
-                  margin: 0,
-                }}
-              >
-                What happens when you combine 15+ years of finance leadership, cutting-edge
-                well-being research, and a passion for unlocking human potential? You get
-                Kristina Shea, a leader who&apos;s traded spreadsheets for breakthrough science
-                and is now revolutionizing how we think about leader and leadership development,
-                coaching, and human flourishing.
-              </p>
-              <p
-                style={{
-                  fontFamily: sans,
-                  fontSize: 15,
-                  lineHeight: 1.85,
-                  color: "#666",
-                  fontWeight: 300,
-                  margin: 0,
-                }}
-              >
-                From her roots as Deputy Director of a major government agency, to working for
-                many years in international non-profits, to the research labs of three prestigious
-                universities, Kristina has always been driven by one question: How do we help
-                people become the best versions of themselves?
-              </p>
-              <p
-                style={{
-                  fontFamily: sans,
-                  fontSize: 15,
-                  lineHeight: 1.85,
-                  color: "#666",
-                  fontWeight: 300,
-                  margin: 0,
-                }}
-              >
-                Her journey took a pivotal turn during her Masters at Pepperdine University,
-                where she discovered Appreciative Inquiry, an approach that flips traditional
-                problem-solving on its head by focusing on what&apos;s already working brilliantly.
-                This wasn&apos;t just an academic exercise — it was a complete mindset shift that led
-                her to earn certifications from Gallup, become an ICF-certified coach, and dive
-                headfirst into the University of Pennsylvania&apos;s renowned MAPP program.
-              </p>
-              <p
-                style={{
-                  fontFamily: sans,
-                  fontSize: 15,
-                  lineHeight: 1.85,
-                  color: "#666",
-                  fontWeight: 300,
-                  margin: 0,
-                }}
-              >
-                Now, as a PhD candidate at the University of Bologna, where she studies leader
-                and leadership development in the Italian and European context, Kristina is
-                bridging the gap between rigorous academic research and real-world impact. Her
-                work focuses on developing leadership interventions and research that enhance
-                collective well-being — because she knows firsthand that sustainable success
-                requires leaders who can thrive personally while creating environments where
-                their teams flourish too.
-              </p>
-              <p
-                style={{
-                  fontFamily: sans,
-                  fontSize: 15,
-                  lineHeight: 1.85,
-                  color: "#666",
-                  fontWeight: 300,
-                  margin: 0,
-                }}
-              >
-                With academic publications, book chapters, and proven well-being interventions
-                under her belt, Kristina is now focused on delivering these evidence-based
-                solutions at scale.
-              </p>
+              {[
+                `What happens when you combine 15+ years of finance leadership, cutting-edge well-being research, and a passion for unlocking human potential? You get Kristina Shea, a leader who's traded spreadsheets for breakthrough science and is now revolutionizing how we think about leader and leadership development, coaching, and human flourishing.`,
+                `From her roots as Deputy Director of a major government agency, to working for many years in international non-profits, to the research labs of three prestigious universities, Kristina has always been driven by one question: How do we help people become the best versions of themselves?`,
+                `Her journey took a pivotal turn during her Masters at Pepperdine University, where she discovered Appreciative Inquiry, an approach that flips traditional problem-solving on its head by focusing on what's already working brilliantly. This wasn't just an academic exercise — it was a complete mindset shift that led her to earn certifications from Gallup, become an ICF-certified coach, and dive headfirst into the University of Pennsylvania's renowned MAPP program.`,
+                `Now, as a PhD candidate at the University of Bologna, where she studies leader and leadership development in the Italian and European context, Kristina is bridging the gap between rigorous academic research and real-world impact. Her work focuses on developing leadership interventions and research that enhance collective well-being — because she knows firsthand that sustainable success requires leaders who can thrive personally while creating environments where their teams flourish too.`,
+                `With academic publications, book chapters, and proven well-being interventions under her belt, Kristina is now focused on delivering these evidence-based solutions at scale.`,
+              ].map((text, i) => (
+                <p
+                  key={i}
+                  style={{
+                    fontFamily: sans,
+                    fontSize: "clamp(14px, 2vw, 15px)",
+                    lineHeight: 1.85,
+                    color: "#666",
+                    fontWeight: 300,
+                    margin: 0,
+                  }}
+                >
+                  {text}
+                </p>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* ─── RESEARCH MISSION ─── */}
-      <section style={{ backgroundColor: "#FFFFFF", padding: "100px 24px" }}>
+      <section className="section-padding" style={{ backgroundColor: "#FFFFFF", padding: "80px 24px" }}>
         <div style={{ maxWidth: 760, margin: "0 auto" }}>
           <p
             style={{
@@ -360,7 +243,7 @@ export default function AboutPage() {
           <h2
             style={{
               fontFamily: serif,
-              fontSize: "clamp(28px, 3vw, 40px)",
+              fontSize: "clamp(24px, 3vw, 40px)",
               fontWeight: 300,
               color: "#1C1410",
               lineHeight: 1.15,
@@ -374,7 +257,7 @@ export default function AboutPage() {
           <p
             style={{
               fontFamily: sans,
-              fontSize: 16,
+              fontSize: "clamp(14px, 2vw, 16px)",
               lineHeight: 1.9,
               color: "#666",
               fontWeight: 300,
@@ -390,7 +273,7 @@ export default function AboutPage() {
           <p
             style={{
               fontFamily: sans,
-              fontSize: 16,
+              fontSize: "clamp(14px, 2vw, 16px)",
               lineHeight: 1.9,
               color: "#666",
               fontWeight: 300,
