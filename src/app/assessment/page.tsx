@@ -39,9 +39,9 @@ export default function AssessmentFlowPage() {
             <Image
               src="/PEL 2.png"
               alt="Positively Energizing Leadership"
-              width={44}
-              height={44}
-              style={{ objectFit: "contain", mixBlendMode: "multiply" }}
+              width={160}
+              height={48}
+              style={{ objectFit: "contain", maxHeight: "40px", mixBlendMode: "multiply" }}
             />
             <div>
               <p className="text-xs font-sans tracking-[0.2em] uppercase text-stone-400 font-medium">

@@ -74,10 +74,10 @@ export default function AdminPage() {
           <div className="flex justify-center mb-6">
             <Image
               src="/PEL 2.png"
-              alt="PEL"
-              width={80}
-              height={80}
-              style={{ objectFit: "contain", mixBlendMode: "multiply" }}
+              alt="Positively Energizing Leadership"
+              width={240}
+              height={90}
+              style={{ objectFit: "contain", maxWidth: "220px", mixBlendMode: "multiply" }}
             />
           </div>
           <h1 className="font-serif text-2xl text-center text-stone-800 mb-2">

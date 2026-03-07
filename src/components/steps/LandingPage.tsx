@@ -47,32 +47,19 @@ export default function LandingPage({ onStart }: LandingPageProps) {
             zIndex: 2,
           }}
         >
-          <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
-            <span
-              style={{
-                fontFamily: serif,
-                fontSize: "20px",
-                fontWeight: 400,
-                fontStyle: "italic",
-                color: "#C4956A",
-                letterSpacing: "-0.01em",
-              }}
-            >
-              Positively Energizing
-            </span>
-            <span
-              style={{
-                fontFamily: sans,
-                fontSize: "11px",
-                fontWeight: 600,
-                letterSpacing: "0.25em",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.6)",
-              }}
-            >
-              LEADERSHIP
-            </span>
-          </div>
+          <Image
+            src="/PEL 2.png"
+            alt="Positively Energizing Leadership"
+            width={200}
+            height={60}
+            priority
+            style={{
+              objectFit: "contain",
+              maxHeight: "48px",
+              filter: "brightness(0) invert(1)",
+              opacity: 0.85,
+            }}
+          />
         </nav>
 
         {/* Hero content */}
@@ -527,28 +514,13 @@ export default function LandingPage({ onStart }: LandingPageProps) {
             Rigorously developed.{" "}
             <span style={{ fontStyle: "italic", color: "#8B6F5E" }}>Empirically validated.</span>
           </h2>
-          <p
-            style={{
-              fontFamily: sans,
-              fontSize: "16px",
-              fontWeight: 300,
-              color: "#888",
-              lineHeight: 1.7,
-              maxWidth: "640px",
-              margin: "0 auto 56px",
-            }}
-          >
-            The PELS was developed through a multi-phase validation study
-            following the highest standards of psychometric instrument development.
-          </p>
-
           {/* Research details */}
           <div
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
               gap: "24px",
-              marginBottom: "56px",
+              marginTop: "56px",
             }}
           >
             {[
@@ -593,30 +565,6 @@ export default function LandingPage({ onStart }: LandingPageProps) {
                 </p>
               </div>
             ))}
-          </div>
-
-          {/* Methodology note */}
-          <div
-            style={{
-              padding: "32px 40px",
-              borderRadius: "20px",
-              backgroundColor: "#FFFFFF",
-              border: "1px solid #EDE5D8",
-              textAlign: "left",
-              maxWidth: "700px",
-              margin: "0 auto",
-            }}
-          >
-            <p style={{ fontFamily: sans, fontSize: "13px", fontWeight: 600, color: "#8B6F5E", marginBottom: "12px" }}>
-              Validation Methodology
-            </p>
-            <p style={{ fontFamily: sans, fontSize: "14px", fontWeight: 300, color: "#666", lineHeight: 1.7 }}>
-              The PELS underwent exploratory factor analysis, confirmatory factor analysis,
-              and convergent/discriminant validity testing. The 18-item scale measures two
-              subdomains — <strong style={{ fontWeight: 500, color: "#1C1410" }}>Relational Energy</strong> (9 items)
-              and <strong style={{ fontWeight: 500, color: "#1C1410" }}>Virtuous Behavior</strong> (9 items) —
-              demonstrating excellent internal consistency and strong psychometric properties.
-            </p>
           </div>
         </div>
       </section>
