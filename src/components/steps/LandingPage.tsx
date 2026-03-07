@@ -18,7 +18,8 @@ export default function LandingPage({ onStart }: LandingPageProps) {
           background: "linear-gradient(165deg, #1C1410 0%, #2C2420 40%, #1C1410 100%)",
           minHeight: "100vh",
           display: "flex",
-          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
           position: "relative",
           overflow: "hidden",
         }}
@@ -36,19 +37,9 @@ export default function LandingPage({ onStart }: LandingPageProps) {
           }}
         />
 
-        {/* Navbar — text only, no logo */}
-        <nav
-          style={{
-            padding: "28px 40px",
-            position: "relative",
-            zIndex: 2,
-          }}
-        />
-
         {/* Hero split layout */}
         <div
           style={{
-            flex: 1,
             display: "flex",
             alignItems: "center",
             position: "relative",
@@ -56,7 +47,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
             maxWidth: "1200px",
             margin: "0 auto",
             width: "100%",
-            padding: "0 40px 80px",
+            padding: "40px 40px",
           }}
           className="hero-split"
         >
