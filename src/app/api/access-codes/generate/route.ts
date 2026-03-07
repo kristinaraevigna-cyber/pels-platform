@@ -46,6 +46,7 @@ export async function POST(request: Request) {
   const supabase = createServiceClient();
   const plaintextCodes: string[] = [];
   const rows: {
+    code: string;
     code_hash: string;
     created_by: string;
     cohort_label: string | null;
@@ -58,9 +59,11 @@ export async function POST(request: Request) {
 
   for (let i = 0; i < Math.min(count, 100); i++) {
     const code = generateCode();
+    const hash = hashCode(code);
     plaintextCodes.push(code);
     rows.push({
-      code_hash: hashCode(code),
+      code: `HASHED-${hash.slice(0, 8)}`,
+      code_hash: hash,
       created_by: "admin",
       cohort_label: cohortLabel || null,
       expires_at: expiresAt,
