@@ -369,7 +369,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
                   Relational Energy
                 </p>
                 <p style={{ fontFamily: sans, fontSize: "13px", fontWeight: 300, color: "#888", lineHeight: 1.6 }}>
-                  The vitality and uplift people feel from interacting with their leader
+                  A surge of psychological resourcefulness that an individual experiences through interaction with another person, which increases their capacities — their motivation, vitality, and ability to perform.
                 </p>
               </div>
               <div
@@ -385,7 +385,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
                   Virtuous Behavior
                 </p>
                 <p style={{ fontFamily: sans, fontSize: "13px", fontWeight: 300, color: "#888", lineHeight: 1.6 }}>
-                  Compassion, integrity, forgiveness, and gratitude in action
+                  Behaviors reflecting the highest aspirations to which human beings aspire — compassion, integrity, forgiveness, gratitude, and trust — that are intrinsically valued and naturally draw people toward the leader who embodies them.
                 </p>
               </div>
             </div>
