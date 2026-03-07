@@ -73,7 +73,7 @@ export default function AdminPage() {
         <div className="bg-white rounded-xl shadow-lg shadow-stone-200/50 px-10 py-12 max-w-sm w-full">
           <div className="flex justify-center mb-6">
             <Image
-              src="/PEL Logo.png"
+              src="/PEL 2.png"
               alt="PEL"
               width={80}
               height={80}

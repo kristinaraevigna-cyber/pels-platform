@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import type { AssessmentData } from "@/lib/types";
 import { PELS_ITEMS, LIKERT_LABELS, scorePELS } from "@/lib/pels-data";
+import { PERMA_SUBSCALES, scorePerma } from "@/lib/perma-data";
 import { createClient } from "@/lib/supabase";
 
 interface AssessmentPageProps {
@@ -79,10 +80,23 @@ export default function AssessmentPage({
         consent_given: true,
       };
 
-      // Add individual item responses
+      // Add individual PELS item responses
       PELS_ITEMS.forEach((item) => {
         record[`pels_${item.id}`] = responses[item.id];
       });
+
+      // Add PERMA+4 responses and computed scores
+      const permaResponses = data.perma_responses || {};
+      for (let i = 1; i <= 29; i++) {
+        record[`perma_${i}`] = permaResponses[i] || null;
+      }
+      if (Object.keys(permaResponses).length === 29) {
+        const permaScore = scorePerma(permaResponses);
+        PERMA_SUBSCALES.forEach((sub) => {
+          record[`perma_${sub.key.toLowerCase()}_mean`] = permaScore.subscaleScores[sub.key];
+        });
+        record.perma_total_mean = permaScore.totalMean;
+      }
 
       const supabase = createClient();
       const { data: inserted, error: dbError } = await supabase

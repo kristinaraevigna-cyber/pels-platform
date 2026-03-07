@@ -47,29 +47,32 @@ export default function LandingPage({ onStart }: LandingPageProps) {
             zIndex: 2,
           }}
         >
-          <Image
-            src="/PEL Logo.png"
-            alt="Positively Energizing Leadership"
-            width={48}
-            height={48}
-            priority
-            style={{
-              objectFit: "contain",
-              borderRadius: "8px",
-            }}
-          />
-          <span
-            style={{
-              fontFamily: serif,
-              fontSize: "16px",
-              fontWeight: 400,
-              color: "rgba(255,255,255,0.7)",
-              marginLeft: "12px",
-              letterSpacing: "-0.01em",
-            }}
-          >
-            PELS
-          </span>
+          <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
+            <span
+              style={{
+                fontFamily: serif,
+                fontSize: "20px",
+                fontWeight: 400,
+                fontStyle: "italic",
+                color: "#C4956A",
+                letterSpacing: "-0.01em",
+              }}
+            >
+              Positively Energizing
+            </span>
+            <span
+              style={{
+                fontFamily: sans,
+                fontSize: "11px",
+                fontWeight: 600,
+                letterSpacing: "0.25em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.6)",
+              }}
+            >
+              LEADERSHIP
+            </span>
+          </div>
         </nav>
 
         {/* Hero content */}

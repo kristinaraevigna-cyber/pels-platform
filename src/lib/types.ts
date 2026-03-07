@@ -17,6 +17,8 @@ export type AssessmentData = {
   wellbeing_q1?: string;
   wellbeing_q2?: string;
   wellbeing_q3?: string;
+  // PERMA+4 responses
+  perma_responses?: Record<number, number>;
   // PELS responses
   pels_responses?: Record<number, number>;
   // Consent

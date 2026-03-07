@@ -6,14 +6,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import IntakePage from "@/components/steps/IntakePage";
 import StoriesPage from "@/components/steps/StoriesPage";
 import WellBeingPage from "@/components/steps/WellBeingPage";
+import PermaPage from "@/components/steps/PermaPage";
 import AssessmentPage from "@/components/steps/AssessmentPage";
 import ResultsPage from "@/components/steps/ResultsPage";
 import type { AssessmentData } from "@/lib/types";
 
-export type Step = "intake" | "stories" | "wellbeing" | "assessment" | "results";
+export type Step = "intake" | "stories" | "wellbeing" | "perma" | "assessment" | "results";
 
-const STEPS: Step[] = ["intake", "stories", "wellbeing", "assessment", "results"];
-const STEP_LABELS = ["About You", "Your Stories", "Well-Being", "Assessment", "Your Results"];
+const STEPS: Step[] = ["intake", "stories", "wellbeing", "perma", "assessment", "results"];
+const STEP_LABELS = ["About You", "Your Stories", "Well-Being", "Well-Being Profile", "Assessment", "Your Results"];
 
 export default function AssessmentFlowPage() {
   const [step, setStep] = useState<Step>("intake");
@@ -36,7 +37,7 @@ export default function AssessmentFlowPage() {
         <div className="max-w-3xl mx-auto px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Image
-              src="/PEL Logo.png"
+              src="/PEL 2.png"
               alt="Positively Energizing Leadership"
               width={44}
               height={44}
@@ -109,8 +110,18 @@ export default function AssessmentFlowPage() {
               <WellBeingPage
                 data={data}
                 onUpdate={updateData}
-                onNext={() => goTo("assessment")}
+                onNext={() => goTo("perma")}
                 onBack={() => goTo("stories")}
+              />
+            </motion.div>
+          )}
+          {step === "perma" && (
+            <motion.div key="perma" {...pageTransition}>
+              <PermaPage
+                data={data}
+                onUpdate={updateData}
+                onNext={() => goTo("assessment")}
+                onBack={() => goTo("wellbeing")}
               />
             </motion.div>
           )}
@@ -123,7 +134,7 @@ export default function AssessmentFlowPage() {
                   setAssessmentId(id);
                   goTo("results");
                 }}
-                onBack={() => goTo("wellbeing")}
+                onBack={() => goTo("perma")}
               />
             </motion.div>
           )}

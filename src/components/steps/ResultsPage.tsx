@@ -10,7 +10,16 @@ import {
   type PELSCategory,
   type Intervention,
 } from "@/lib/pels-data";
-import { RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer } from "recharts";
+import {
+  PERMA_SUBSCALES,
+  scorePerma,
+  getPermaInterpretation,
+  type PermaScore,
+} from "@/lib/perma-data";
+import {
+  RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell,
+} from "recharts";
 
 interface ResultsPageProps {
   data: AssessmentData;
@@ -24,6 +33,11 @@ export default function ResultsPage({ data, assessmentId }: ResultsPageProps) {
   const responses = data.pels_responses || {};
   const score = scorePELS(responses);
   const interventions = getPersonalizedInterventions(score.category, responses, 5);
+
+  // PERMA+4 scoring
+  const permaResponses = data.perma_responses || {};
+  const hasPerma = Object.keys(permaResponses).length === 29;
+  const permaScore = hasPerma ? scorePerma(permaResponses) : null;
 
   // Build radar data from subdomain means
   const relationalItems = PELS_ITEMS.filter((i) => i.subdomain === "Relational Energy");
@@ -57,7 +71,7 @@ export default function ResultsPage({ data, assessmentId }: ResultsPageProps) {
       const res = await fetch("/api/generate-report", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ data, score, interventions, assessmentId }),
+        body: JSON.stringify({ data, score, interventions, assessmentId, permaScore }),
       });
       const blob = await res.blob();
       const url = window.URL.createObjectURL(blob);
@@ -236,6 +250,167 @@ export default function ResultsPage({ data, assessmentId }: ResultsPageProps) {
         </div>
       </motion.div>
 
+      {/* PERMA+4 Well-Being Profile */}
+      {hasPerma && permaScore && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.55 }}
+          className="mb-10"
+        >
+          <div className="mb-6">
+            <h3 className="text-3xl text-stone-800 mb-2" style={{ fontWeight: 300 }}>
+              Your Workplace Well-Being Profile
+            </h3>
+            <p className="text-stone-500 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
+              Your scores across the 9 dimensions of the{" "}
+              <span className="text-[#8B6F5E] font-medium">PERMA+4 Workplace Well-Being Scale</span>{" "}
+              (Donaldson &amp; Donaldson, 2020).
+            </p>
+          </div>
+
+          {/* Bar chart */}
+          <div className="bg-white rounded-3xl border border-stone-200 p-8 mb-6">
+            <div className="h-72">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={PERMA_SUBSCALES.map((sub) => ({
+                    name: sub.label,
+                    score: Number((permaScore.subscaleScores[sub.key] || 0).toFixed(1)),
+                    color: sub.color,
+                  }))}
+                  margin={{ top: 5, right: 10, left: -10, bottom: 5 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+                  <XAxis
+                    dataKey="name"
+                    tick={{ fontSize: 10, fontFamily: "sans-serif", fill: "#6B7280" }}
+                    angle={-35}
+                    textAnchor="end"
+                    height={70}
+                    interval={0}
+                  />
+                  <YAxis
+                    domain={[0, 10]}
+                    tick={{ fontSize: 11, fontFamily: "sans-serif", fill: "#6B7280" }}
+                    tickCount={6}
+                  />
+                  <Tooltip
+                    contentStyle={{
+                      fontFamily: "sans-serif",
+                      fontSize: 13,
+                      borderRadius: 12,
+                      border: "1px solid #E5E7EB",
+                    }}
+                    formatter={(value: number) => [`${value} / 10`, "Score"]}
+                  />
+                  <Bar dataKey="score" radius={[6, 6, 0, 0]} barSize={36}>
+                    {PERMA_SUBSCALES.map((sub) => (
+                      <Cell key={sub.key} fill={sub.color} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="text-center mt-2">
+              <span className="text-sm text-stone-500" style={{ fontFamily: "sans-serif" }}>
+                Overall Well-Being Mean:{" "}
+              </span>
+              <span className="text-lg font-semibold text-[#8B6F5E]">
+                {permaScore.totalMean.toFixed(1)}
+              </span>
+              <span className="text-stone-400 text-sm"> / 10</span>
+            </div>
+          </div>
+
+          {/* Highlight cards */}
+          <div className="grid sm:grid-cols-2 gap-6 mb-6">
+            <div className="bg-emerald-50 rounded-2xl border border-emerald-200 p-6">
+              <h4
+                className="text-xs tracking-[0.15em] uppercase text-emerald-700 mb-3"
+                style={{ fontFamily: "sans-serif", fontWeight: 600 }}
+              >
+                Your Strongest Area
+              </h4>
+              <p className="text-stone-800 font-semibold text-lg mb-1">
+                {permaScore.highest.label}
+              </p>
+              <div className="flex items-baseline gap-1 mb-2">
+                <span className="text-emerald-600 font-bold text-2xl">
+                  {permaScore.highest.score.toFixed(1)}
+                </span>
+                <span className="text-stone-400 text-sm">/10</span>
+              </div>
+              <p className="text-stone-600 text-sm" style={{ fontFamily: "sans-serif" }}>
+                {getPermaInterpretation(permaScore.highest.key, permaScore.highest.score).text}
+              </p>
+            </div>
+
+            <div className="bg-amber-50 rounded-2xl border border-amber-200 p-6">
+              <h4
+                className="text-xs tracking-[0.15em] uppercase text-amber-700 mb-3"
+                style={{ fontFamily: "sans-serif", fontWeight: 600 }}
+              >
+                Growth Opportunity
+              </h4>
+              <p className="text-stone-800 font-semibold text-lg mb-1">
+                {permaScore.lowest.label}
+              </p>
+              <div className="flex items-baseline gap-1 mb-2">
+                <span className="text-amber-600 font-bold text-2xl">
+                  {permaScore.lowest.score.toFixed(1)}
+                </span>
+                <span className="text-stone-400 text-sm">/10</span>
+              </div>
+              <p className="text-stone-600 text-sm" style={{ fontFamily: "sans-serif" }}>
+                {getPermaInterpretation(permaScore.lowest.key, permaScore.lowest.score).text}
+              </p>
+            </div>
+          </div>
+
+          {/* All 9 subscale cards */}
+          <div className="space-y-3">
+            {PERMA_SUBSCALES.map((sub) => {
+              const subScore = permaScore.subscaleScores[sub.key] || 0;
+              const interp = getPermaInterpretation(sub.key, subScore);
+              return (
+                <div
+                  key={sub.key}
+                  className="rounded-xl border border-stone-200 bg-white p-4 flex items-center gap-4"
+                >
+                  <div
+                    className="w-2 h-10 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: sub.color }}
+                  />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between mb-1">
+                      <p className="text-stone-700 text-sm font-medium">{sub.label}</p>
+                      <div className="flex items-baseline gap-1">
+                        <span className="text-[#8B6F5E] font-bold">{subScore.toFixed(1)}</span>
+                        <span className="text-stone-400 text-xs">/10</span>
+                      </div>
+                    </div>
+                    {/* Score bar */}
+                    <div className="h-2 rounded-full bg-stone-100 mb-2">
+                      <div
+                        className="h-full rounded-full transition-all duration-500"
+                        style={{
+                          width: `${(subScore / 10) * 100}%`,
+                          backgroundColor: sub.color,
+                        }}
+                      />
+                    </div>
+                    <p className="text-stone-500 text-xs" style={{ fontFamily: "sans-serif" }}>
+                      <span className="font-medium text-stone-600">{interp.level}</span> — {interp.text}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </motion.div>
+      )}
+
       {/* Evidence-based interventions */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -284,8 +459,8 @@ export default function ResultsPage({ data, assessmentId }: ResultsPageProps) {
           Download Your Full Report
         </h3>
         <p className="text-white/70 text-sm leading-relaxed mb-6 max-w-sm mx-auto" style={{ fontFamily: "sans-serif" }}>
-          Your personalized PDF includes your complete PELS score, attribute profile, your
-          leader stories, and all evidence-based practices with full instructions.
+          Your personalized PDF includes your complete PELS score, attribute profile,
+          PERMA+4 well-being profile, your leader stories, and all evidence-based practices with full instructions.
         </p>
         <button
           onClick={handleDownloadPDF}

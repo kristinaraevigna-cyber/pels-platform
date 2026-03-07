@@ -8,6 +8,12 @@ import {
 } from "@react-pdf/renderer";
 import type { PELSScore, Intervention } from "@/lib/pels-data";
 import { PELS_ITEMS } from "@/lib/pels-data";
+import {
+  PERMA_SUBSCALES,
+  getPermaInterpretation,
+  getPermaRelationToLeadership,
+  type PermaScore,
+} from "@/lib/perma-data";
 import type { AssessmentData } from "@/lib/types";
 
 // ─── Styles ──────────────────────────────────────────────────
@@ -264,6 +270,7 @@ interface PELSReportProps {
   score: PELSScore;
   interventions: Intervention[];
   assessmentId: string | null;
+  permaScore?: PermaScore | null;
 }
 
 export default function PELSReport({
@@ -271,6 +278,7 @@ export default function PELSReport({
   score,
   interventions,
   assessmentId,
+  permaScore,
 }: PELSReportProps) {
   const responses = data.pels_responses || {};
   const date = new Date().toLocaleDateString("en-US", {
@@ -462,7 +470,112 @@ export default function PELSReport({
         <Text style={styles.pageNumber}>4</Text>
       </Page>
 
-      {/* ── PAGE 5: STORIES ─────────────────────────────── */}
+      {/* ── PAGE 5: PERMA+4 WELL-BEING PROFILE ───────────── */}
+      {permaScore && (
+        <Page size="A4" style={styles.page}>
+          <Text style={styles.sectionTitle}>Workplace Well-Being Profile</Text>
+          <Text style={styles.h2}>PERMA+4 Results</Text>
+          <Text style={[styles.bodyText, { marginBottom: 16 }]}>
+            The PERMA+4 Workplace Well-Being Scale (Donaldson &amp; Donaldson, 2020) measures
+            9 dimensions of well-being at work on a 1–10 scale.
+          </Text>
+
+          {/* Total score callout */}
+          <View style={{
+            backgroundColor: "#F7F3EE",
+            borderRadius: 8,
+            padding: 16,
+            marginBottom: 16,
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 12,
+            borderWidth: 1,
+            borderColor: "#C4956A33",
+          }}>
+            <Text style={{ fontSize: 36, color: "#8B6F5E", fontFamily: "Helvetica" }}>
+              {permaScore.totalMean.toFixed(1)}
+            </Text>
+            <View>
+              <Text style={{ fontSize: 10, color: "#8B6F5E99" }}>/ 10</Text>
+              <Text style={{ fontSize: 10, color: "#555", marginTop: 2 }}>Overall Well-Being Mean</Text>
+            </View>
+          </View>
+
+          {/* Horizontal bar chart using View elements */}
+          {PERMA_SUBSCALES.map((sub) => {
+            const subScore = permaScore.subscaleScores[sub.key] || 0;
+            const interp = getPermaInterpretation(sub.key, subScore);
+            return (
+              <View key={sub.key} style={{ marginBottom: 10 }}>
+                <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 3 }}>
+                  <Text style={{ fontSize: 9, color: "#555", fontFamily: "Helvetica-Bold" }}>
+                    {sub.label}
+                  </Text>
+                  <Text style={{ fontSize: 9, color: "#8B6F5E", fontFamily: "Helvetica-Bold" }}>
+                    {subScore.toFixed(1)} — {interp.level}
+                  </Text>
+                </View>
+                <View style={{ height: 8, backgroundColor: "#E8E0D8", borderRadius: 4 }}>
+                  <View
+                    style={{
+                      height: 8,
+                      borderRadius: 4,
+                      backgroundColor: sub.color,
+                      width: `${(subScore / 10) * 100}%`,
+                    }}
+                  />
+                </View>
+              </View>
+            );
+          })}
+
+          {/* Highest/Lowest callout cards */}
+          <View style={[styles.twoCol, { marginTop: 16 }]}>
+            <View style={styles.col}>
+              <Text style={styles.label}>Strongest Area</Text>
+              <View style={styles.miniCard}>
+                <Text style={styles.attributeTag}>{permaScore.highest.label}</Text>
+                <Text style={{ fontSize: 16, color: "#22C55E", fontFamily: "Helvetica-Bold", marginBottom: 4 }}>
+                  {permaScore.highest.score.toFixed(1)}<Text style={{ fontSize: 9, color: "#999" }}>/10</Text>
+                </Text>
+                <Text style={[styles.bodyText, { fontSize: 8 }]}>
+                  {getPermaInterpretation(permaScore.highest.key, permaScore.highest.score).text}
+                </Text>
+              </View>
+            </View>
+            <View style={styles.col}>
+              <Text style={styles.label}>Growth Opportunity</Text>
+              <View style={styles.miniCard}>
+                <Text style={styles.attributeTag}>{permaScore.lowest.label}</Text>
+                <Text style={{ fontSize: 16, color: "#F59E0B", fontFamily: "Helvetica-Bold", marginBottom: 4 }}>
+                  {permaScore.lowest.score.toFixed(1)}<Text style={{ fontSize: 9, color: "#999" }}>/10</Text>
+                </Text>
+                <Text style={[styles.bodyText, { fontSize: 8 }]}>
+                  {getPermaInterpretation(permaScore.lowest.key, permaScore.lowest.score).text}
+                </Text>
+              </View>
+            </View>
+          </View>
+
+          {/* Leadership connection */}
+          <View style={{ marginTop: 12, backgroundColor: "#F7F3EE", borderRadius: 8, padding: 12 }}>
+            <Text style={styles.label}>Connection to Leadership</Text>
+            <Text style={[styles.bodyText, { fontSize: 8 }]}>
+              {getPermaRelationToLeadership(permaScore.lowest.key, permaScore.lowest.score, score.category)}
+            </Text>
+          </View>
+
+          {/* Citation */}
+          <Text style={[styles.bodyText, { fontSize: 7, color: "#AAAAAA", marginTop: 12, fontFamily: "Helvetica-Oblique" }]}>
+            Donaldson, S. I., &amp; Donaldson, S. I. (2020). The Positive Functioning at Work Scale.
+            Journal of Well-Being Assessment, 4(2), 181–215. DOI: 10.1007/s41543-020-00033-1
+          </Text>
+
+          <Text style={styles.pageNumber}>5</Text>
+        </Page>
+      )}
+
+      {/* ── PAGE 6: STORIES ─────────────────────────────── */}
       {(data.story_one || data.story_two || data.wellbeing_q1) && (
         <Page size="A4" style={styles.page}>
           <Text style={styles.sectionTitle}>Your Leadership Narratives</Text>
@@ -511,11 +624,11 @@ export default function PELSReport({
             </View>
           )}
 
-          <Text style={styles.pageNumber}>5</Text>
+          <Text style={styles.pageNumber}>6</Text>
         </Page>
       )}
 
-      {/* ── PAGE 6+: INTERVENTIONS ──────────────────────── */}
+      {/* ── INTERVENTIONS ────────────────────────────────── */}
       <Page size="A4" style={styles.page}>
         <Text style={styles.sectionTitle}>Evidence-Based Practices</Text>
         <Text style={styles.h2}>Your Personalized Recommendations</Text>
@@ -576,7 +689,10 @@ export default function PELSReport({
             stress. American Psychologist, 44(3), 513–524.{"\n\n"}
             Seligman, M. E. P., Steen, T. A., Park, N., & Peterson, C. (2005). Positive{"\n"}
             psychology progress: Empirical validation of interventions. American Psychologist,{"\n"}
-            60(5), 410–421.
+            60(5), 410–421.{"\n\n"}
+            Donaldson, S. I., & Donaldson, S. I. (2020). The Positive Functioning at Work Scale:{"\n"}
+            Psychometric Assessment, Validation, and Measurement Invariance. Journal of Well-Being{"\n"}
+            Assessment, 4(2), 181–215. DOI: 10.1007/s41543-020-00033-1
           </Text>
         </View>
 

@@ -66,9 +66,9 @@ export default function WellBeingPage({ data, onUpdate, onNext, onBack }: WellBe
         {/* Transition notice */}
         <div className="rounded-2xl bg-gradient-to-br from-[#8B6F5E]/5 to-[#C4956A]/5 border border-[#C4956A]/20 p-6">
           <p className="text-sm text-stone-600 leading-relaxed text-center" style={{ fontFamily: "sans-serif" }}>
-            <strong className="text-[#8B6F5E]">Next:</strong> The 18-item Positively Energizing Leadership Scale —
-            the validated assessment that will generate your personalized score and report.
-            It takes approximately 5–7 minutes to complete.
+            <strong className="text-[#8B6F5E]">Next:</strong> The PERMA+4 Workplace Well-Being Profile —
+            a 29-item scale measuring 9 dimensions of your well-being at work, followed by
+            the 18-item PELS assessment. Together they take approximately 10–15 minutes.
           </p>
         </div>
       </div>

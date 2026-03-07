@@ -6,9 +6,9 @@ import React from "react";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { data, score, interventions, assessmentId } = body;
+    const { data, score, interventions, assessmentId, permaScore } = body;
 
-    const element = React.createElement(PELSReport, { data, score, interventions, assessmentId });
+    const element = React.createElement(PELSReport, { data, score, interventions, assessmentId, permaScore });
     // @ts-expect-error — PELSReport wraps a <Document> but renderToBuffer expects DocumentProps directly
     const pdfBuffer = await renderToBuffer(element);
 
