@@ -193,7 +193,7 @@ export const STORY_PROMPTS = [
       "Think of a specific time when your leader showed genuine care for your well-being — either professionally or personally. What did they do, and what did it mean to you?",
     placeholder:
       "For example: 'During a particularly stressful period at work, my leader...'",
-    required: false,
+    required: true,
   },
 ];
 

@@ -17,10 +17,14 @@ export default function StoriesPage({ data, onUpdate, onNext, onBack }: StoriesP
 
   const validate = () => {
     const e: Record<string, string> = {};
-    const story = data.story_one?.trim();
-    if (!story || story.split(" ").length < 15) {
-      e.story_one = "Please share a bit more — at least a few sentences";
-    }
+    STORY_PROMPTS.forEach((prompt) => {
+      if (prompt.required) {
+        const story = (data[prompt.id as keyof AssessmentData] as string)?.trim();
+        if (!story || story.split(/\s+/).length < 15) {
+          e[prompt.id] = "Please share a bit more — at least a few sentences";
+        }
+      }
+    });
     setErrors(e);
     return Object.keys(e).length === 0;
   };
