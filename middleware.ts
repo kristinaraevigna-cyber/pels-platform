@@ -1,6 +1,8 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
+const SITE_URL = "https://pels-platform.onrender.com";
+
 export async function middleware(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
 
@@ -38,17 +40,12 @@ export async function middleware(request: NextRequest) {
     !user &&
     (pathname.startsWith("/assessment") || pathname.startsWith("/results"))
   ) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/login";
-    url.searchParams.set("redirectTo", pathname);
-    return NextResponse.redirect(url);
+    return NextResponse.redirect(new URL(`/login?redirectTo=${pathname}`, SITE_URL));
   }
 
   // If logged-in user visits /login or /signup, redirect to /assessment
   if (user && (pathname === "/login" || pathname === "/signup")) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/assessment";
-    return NextResponse.redirect(url);
+    return NextResponse.redirect(new URL("/assessment", SITE_URL));
   }
 
   return supabaseResponse;

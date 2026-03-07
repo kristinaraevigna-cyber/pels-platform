@@ -2,6 +2,8 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
+const SITE_URL = "https://pels-platform.onrender.com";
+
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
@@ -30,9 +32,7 @@ export async function GET(request: NextRequest) {
 
     if (error) {
       console.error("Auth callback error:", error);
-      return NextResponse.redirect(
-        new URL("/login?error=auth_callback_failed", requestUrl.origin)
-      );
+      return NextResponse.redirect(new URL("/login?error=auth_callback_failed", SITE_URL));
     }
 
     if (data.user) {
@@ -44,18 +44,12 @@ export async function GET(request: NextRequest) {
         .single();
 
       if (profile?.has_paid || profile?.has_promo_access) {
-        return NextResponse.redirect(
-          new URL("/assessment", requestUrl.origin)
-        );
+        return NextResponse.redirect(new URL("/assessment", SITE_URL));
       } else {
-        return NextResponse.redirect(
-          new URL("/access-code", requestUrl.origin)
-        );
+        return NextResponse.redirect(new URL("/access-code", SITE_URL));
       }
     }
   }
 
-  return NextResponse.redirect(
-    new URL("/login?error=auth_callback_failed", requestUrl.origin)
-  );
+  return NextResponse.redirect(new URL("/login?error=auth_callback_failed", SITE_URL));
 }
