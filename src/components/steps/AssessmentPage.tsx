@@ -105,37 +105,23 @@ export default function AssessmentPage({
         record.perma_overall_mean = permaScore.totalMean;
       }
 
-      // Generate ID client-side to avoid needing .select().single() after insert
-      const assessmentId = crypto.randomUUID();
-      record.id = assessmentId;
-
       console.log("[PELS Submit] Record keys (" + Object.keys(record).length + "):", Object.keys(record));
-      console.log("[PELS Submit] Generated ID:", assessmentId);
-      console.log("[PELS Submit] Inserting via fetch...");
+      console.log("[PELS Submit] Saving via API route...");
 
-      // Use fetch directly instead of Supabase JS client to avoid potential hanging
-      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-      const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-
-      const res = await fetch(`${supabaseUrl}/rest/v1/assessments`, {
+      const res = await fetch("/api/assessments/save", {
         method: "POST",
-        headers: {
-          "apikey": supabaseKey,
-          "Authorization": `Bearer ${supabaseKey}`,
-          "Content-Type": "application/json",
-          "Prefer": "return=minimal",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(record),
       });
 
-      console.log("[PELS Submit] Fetch response status:", res.status);
+      const result = await res.json();
+      console.log("[PELS Submit] API response:", res.status, result);
 
       if (!res.ok) {
-        const errorBody = await res.text();
-        console.error("[PELS Submit] INSERT FAILED:", res.status, errorBody);
-        throw new Error(`Database error (${res.status}): ${errorBody}`);
+        throw new Error(result.error || "Failed to save assessment");
       }
 
+      const assessmentId = result.id;
       console.log("[PELS Submit] Success! Navigating to results with id:", assessmentId);
       onUpdate({ pels_responses: responses });
       onNext(assessmentId);
