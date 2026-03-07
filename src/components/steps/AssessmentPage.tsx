@@ -38,9 +38,10 @@ export default function AssessmentPage({
   };
 
   const handleSubmit = async () => {
+    alert("Submit clicked — function is running");
+
     if (!allAnswered) {
       setShowValidation(true);
-      // Scroll to first unanswered
       const firstUnanswered = PELS_ITEMS.find((i) => !responses[i.id]);
       if (firstUnanswered) {
         document.getElementById(`item-${firstUnanswered.id}`)?.scrollIntoView({
@@ -56,6 +57,7 @@ export default function AssessmentPage({
 
     try {
       console.log("[PELS Submit] Starting submission...");
+
       const score = scorePELS(responses);
       console.log("[PELS Submit] Score calculated:", score);
 
@@ -101,10 +103,11 @@ export default function AssessmentPage({
         PERMA_SUBSCALES.forEach((sub) => {
           record[`perma_${sub.key.toLowerCase()}_mean`] = permaScore.subscaleScores[sub.key];
         });
-        record.perma_total_mean = permaScore.totalMean;
+        record.perma_overall_mean = permaScore.totalMean;
       }
 
       console.log("[PELS Submit] Record keys:", Object.keys(record));
+      console.log("[PELS Submit] Inserting into Supabase...");
 
       const supabase = createClient();
 
@@ -118,20 +121,27 @@ export default function AssessmentPage({
         .select("id")
         .single();
 
+      console.log("[PELS Submit] Insert result — data:", inserted, "error:", dbError);
+
       if (dbError) {
-        console.error("[PELS Submit] DB error:", dbError);
-        throw dbError;
+        throw new Error(dbError.message || JSON.stringify(dbError));
       }
 
-      console.log("[PELS Submit] Insert successful, id:", inserted.id);
+      if (!inserted || !inserted.id) {
+        throw new Error("Insert succeeded but no ID was returned");
+      }
+
+      console.log("[PELS Submit] Success! Navigating to results with id:", inserted.id);
       onUpdate({ pels_responses: responses });
       onNext(inserted.id);
     } catch (err: unknown) {
       console.error("[PELS Submit] Caught error:", err);
-      const message = err instanceof Error ? err.message
-        : typeof err === "object" && err !== null && "message" in err ? String((err as { message: unknown }).message)
-        : "Unknown error";
-      setError(`Failed to save: ${message}. Please try again or contact support.`);
+      const message = err instanceof Error
+        ? err.message
+        : typeof err === "object" && err !== null && "message" in err
+        ? String((err as { message: unknown }).message)
+        : JSON.stringify(err);
+      setError(`Failed to save: ${message}`);
       setSubmitting(false);
     }
   };
