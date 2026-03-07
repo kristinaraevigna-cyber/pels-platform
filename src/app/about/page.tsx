@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 const serif = "'Cormorant Garamond', Georgia, serif";
 const sans = "'Inter', system-ui, -apple-system, sans-serif";
 
@@ -149,54 +151,52 @@ export default function AboutPage() {
       <section style={{ backgroundColor: "#F7F3EE", padding: "80px 24px" }}>
         <div
           style={{
-            maxWidth: 900,
+            maxWidth: 1000,
             margin: "0 auto",
             background: "#FFFFFF",
             borderRadius: 24,
             overflow: "hidden",
             boxShadow: "0 8px 40px rgba(0,0,0,0.06)",
-            border: "1px solid #EDE5D8",
+            border: "1px solid #E8E0D8",
             display: "flex",
             flexWrap: "wrap",
             alignItems: "stretch",
           }}
         >
-          {/* Photo placeholder */}
+          {/* Photo */}
           <div
             style={{
-              flex: "0 0 280px",
-              minHeight: 320,
+              flex: "0 0 320px",
+              minHeight: 400,
               background: "#F7F3EE",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              padding: "40px",
             }}
           >
             <div
               style={{
-                width: 200,
-                height: 200,
-                borderRadius: "50%",
-                background: "rgba(139,111,94,0.12)",
-                border: "1px solid #EDE5D8",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: 13,
-                fontFamily: sans,
-                color: "#8B6F5E",
-                textAlign: "center",
-                padding: 20,
+                width: 280,
+                height: 280,
+                borderRadius: 20,
+                overflow: "hidden",
+                boxShadow: "0 12px 40px rgba(0,0,0,0.1)",
+                position: "relative",
               }}
             >
-              Team Photo
-              <br />
-              Placeholder
+              <Image
+                src="/KShea headshot.jpg"
+                alt="Kristina Shea"
+                fill
+                style={{ objectFit: "cover" }}
+                sizes="280px"
+              />
             </div>
           </div>
 
           {/* Bio */}
-          <div style={{ padding: "48px", flex: "1 1 300px" }}>
+          <div style={{ padding: "48px", flex: "1 1 340px" }}>
             <p
               style={{
                 fontFamily: sans,
@@ -213,40 +213,135 @@ export default function AboutPage() {
             <h2
               style={{
                 fontFamily: serif,
-                fontSize: 32,
+                fontSize: 36,
                 fontWeight: 400,
                 color: "#1C1410",
-                marginBottom: 4,
+                marginBottom: 6,
               }}
             >
-              [Researcher Name]
+              Kristina Shea
             </h2>
             <p
               style={{
                 fontFamily: sans,
                 fontSize: 14,
                 color: "#8B6F5E",
-                marginBottom: 24,
+                marginBottom: 16,
                 fontStyle: "italic",
               }}
             >
-              [Title / Affiliation]
+              PhD Candidate | Leadership Researcher | ICF-Certified Coach
             </p>
-            <p
-              style={{
-                fontFamily: sans,
-                fontSize: 15,
-                lineHeight: 1.8,
-                color: "#666",
-                fontWeight: 300,
-                margin: 0,
-              }}
-            >
-              [Bio paragraph — describe the researcher&apos;s background, expertise in positive
-              organizational scholarship, and their role in developing the Positively Energizing
-              Leadership Scale. This section should highlight their academic credentials, research
-              interests, and contributions to the field.]
-            </p>
+
+            {/* Credential badges */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 28 }}>
+              {[
+                "PhD Candidate \u00B7 University of Bologna",
+                "ICF-Certified Coach",
+                "Gallup Certified",
+                "University of Pennsylvania MAPP",
+              ].map((badge) => (
+                <span
+                  key={badge}
+                  style={{
+                    fontFamily: sans,
+                    fontSize: 11,
+                    fontWeight: 500,
+                    color: "#8B6F5E",
+                    background: "rgba(196,149,106,0.1)",
+                    border: "1px solid rgba(196,149,106,0.25)",
+                    padding: "5px 14px",
+                    borderRadius: 100,
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {badge}
+                </span>
+              ))}
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              <p
+                style={{
+                  fontFamily: sans,
+                  fontSize: 15,
+                  lineHeight: 1.85,
+                  color: "#666",
+                  fontWeight: 300,
+                  margin: 0,
+                }}
+              >
+                What happens when you combine 15+ years of finance leadership, cutting-edge
+                well-being research, and a passion for unlocking human potential? You get
+                Kristina Shea, a leader who&apos;s traded spreadsheets for breakthrough science
+                and is now revolutionizing how we think about leader and leadership development,
+                coaching, and human flourishing.
+              </p>
+              <p
+                style={{
+                  fontFamily: sans,
+                  fontSize: 15,
+                  lineHeight: 1.85,
+                  color: "#666",
+                  fontWeight: 300,
+                  margin: 0,
+                }}
+              >
+                From her roots as Deputy Director of a major government agency, to working for
+                many years in international non-profits, to the research labs of three prestigious
+                universities, Kristina has always been driven by one question: How do we help
+                people become the best versions of themselves?
+              </p>
+              <p
+                style={{
+                  fontFamily: sans,
+                  fontSize: 15,
+                  lineHeight: 1.85,
+                  color: "#666",
+                  fontWeight: 300,
+                  margin: 0,
+                }}
+              >
+                Her journey took a pivotal turn during her Masters at Pepperdine University,
+                where she discovered Appreciative Inquiry, an approach that flips traditional
+                problem-solving on its head by focusing on what&apos;s already working brilliantly.
+                This wasn&apos;t just an academic exercise — it was a complete mindset shift that led
+                her to earn certifications from Gallup, become an ICF-certified coach, and dive
+                headfirst into the University of Pennsylvania&apos;s renowned MAPP program.
+              </p>
+              <p
+                style={{
+                  fontFamily: sans,
+                  fontSize: 15,
+                  lineHeight: 1.85,
+                  color: "#666",
+                  fontWeight: 300,
+                  margin: 0,
+                }}
+              >
+                Now, as a PhD candidate at the University of Bologna, where she studies leader
+                and leadership development in the Italian and European context, Kristina is
+                bridging the gap between rigorous academic research and real-world impact. Her
+                work focuses on developing leadership interventions and research that enhance
+                collective well-being — because she knows firsthand that sustainable success
+                requires leaders who can thrive personally while creating environments where
+                their teams flourish too.
+              </p>
+              <p
+                style={{
+                  fontFamily: sans,
+                  fontSize: 15,
+                  lineHeight: 1.85,
+                  color: "#666",
+                  fontWeight: 300,
+                  margin: 0,
+                }}
+              >
+                With academic publications, book chapters, and proven well-being interventions
+                under her belt, Kristina is now focused on delivering these evidence-based
+                solutions at scale.
+              </p>
+            </div>
           </div>
         </div>
       </section>
