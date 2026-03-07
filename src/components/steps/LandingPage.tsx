@@ -282,8 +282,8 @@ export default function LandingPage({ onStart }: LandingPageProps) {
               }}
             >
               <Image
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800"
-                alt="Diverse team collaborating in a meeting"
+                src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800"
+                alt="People connecting with warmth in natural light"
                 fill
                 style={{ objectFit: "cover" }}
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -355,7 +355,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
             </p>
 
             {/* Two pillars */}
-            <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", justifyContent: "center" }}>
               <div
                 style={{
                   flex: "1 1 200px",
