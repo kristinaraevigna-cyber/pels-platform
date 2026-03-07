@@ -22,8 +22,8 @@ export const PERMA_SUBSCALES: PermaSubscale[] = [
   { key: "ACC", label: "Accomplishment", shortLabel: "Accomplish-\nment", color: "#85A392", items: [14, 15, 16] },
   { key: "PH", label: "Physical Health", shortLabel: "Physical\nHealth", color: "#7FB069", items: [17, 18, 19, 20] },
   { key: "MIND", label: "Mindset", shortLabel: "Mindset", color: "#6B9AC4", items: [21, 22, 23] },
-  { key: "ENV", label: "Environment", shortLabel: "Environment", color: "#97C1A9", items: [24, 25, 26] },
-  { key: "ES", label: "Economic Security", shortLabel: "Economic\nSecurity", color: "#B5838D", items: [27, 28, 29] },
+  { key: "ES", label: "Economic Security", shortLabel: "Economic\nSecurity", color: "#B5838D", items: [24, 25, 26] },
+  { key: "ENV", label: "Environment", shortLabel: "Environment", color: "#97C1A9", items: [27, 28, 29] },
 ];
 
 // ─── 29 ITEMS ───────────────────────────────────────────────
@@ -46,8 +46,8 @@ export const PERMA_ITEMS: PermaItem[] = [
   { id: 6, subscaleKey: "EN", text: "When I am working on something I enjoy, I forget everything else around me." },
 
   // Relationships (REL)
-  { id: 7, subscaleKey: "REL", text: "I can receive support from coworkers if I need it." },
-  { id: 8, subscaleKey: "REL", text: "I feel appreciated by my coworkers." },
+  { id: 7, subscaleKey: "REL", text: "I can receive support from others when I need it." },
+  { id: 8, subscaleKey: "REL", text: "I feel appreciated by my workers." },
   { id: 9, subscaleKey: "REL", text: "I trust my colleagues." },
   { id: 10, subscaleKey: "REL", text: "My colleagues bring out my best self." },
 
@@ -64,7 +64,7 @@ export const PERMA_ITEMS: PermaItem[] = [
   // Physical Health (PH)
   { id: 17, subscaleKey: "PH", text: "I typically feel physically healthy." },
   { id: 18, subscaleKey: "PH", text: "I am rarely sick." },
-  { id: 19, subscaleKey: "PH", text: "I can typically overcome sources of physical distress." },
+  { id: 19, subscaleKey: "PH", text: "I can typically overcome sources of physical distress (e.g., insomnia, injuries, vision issues, etc.)" },
   { id: 20, subscaleKey: "PH", text: "I feel in control of my physical health." },
 
   // Mindset (MIND)
@@ -72,30 +72,27 @@ export const PERMA_ITEMS: PermaItem[] = [
   { id: 22, subscaleKey: "MIND", text: "I believe my job will allow me to develop in the future." },
   { id: 23, subscaleKey: "MIND", text: "I have a bright future at my current work organization." },
 
-  // Environment (ENV)
-  { id: 24, subscaleKey: "ENV", text: "My physical work environment allows me to focus on my work." },
-  { id: 25, subscaleKey: "ENV", text: "There is plenty of natural light in my workplace." },
-  { id: 26, subscaleKey: "ENV", text: "I can conveniently access nature in my work environment." },
-
   // Economic Security (ES)
-  { id: 27, subscaleKey: "ES", text: "I am comfortable with my current income." },
-  { id: 28, subscaleKey: "ES", text: "I could lose several months of pay due to serious illness, and still have my economic security." },
-  { id: 29, subscaleKey: "ES", text: "In the event of a financial emergency, I have adequate savings." },
+  { id: 24, subscaleKey: "ES", text: "I am comfortable with my current income." },
+  { id: 25, subscaleKey: "ES", text: "I could lose several months of pay due to serious illness, and still have my economic security." },
+  { id: 26, subscaleKey: "ES", text: "In the event of a financial emergency, I have adequate savings." },
+
+  // Environment (ENV)
+  { id: 27, subscaleKey: "ENV", text: "My physical work environment (e.g., office space) allows me to focus on my work." },
+  { id: 28, subscaleKey: "ENV", text: "There is plenty of natural light in my workplace." },
+  { id: 29, subscaleKey: "ENV", text: "I can conveniently access nature in my work environment (e.g., parks, oceans, mountains, etc.)" },
 ];
 
-// ─── LIKERT SCALE (1–10) ───────────────────────────────────
+// ─── LIKERT SCALE (1–7) ───────────────────────────────────
 
 export const PERMA_LIKERT = [
   { value: 1, label: "Strongly Disagree" },
-  { value: 2, label: "2" },
-  { value: 3, label: "3" },
-  { value: 4, label: "4" },
-  { value: 5, label: "5" },
-  { value: 6, label: "6" },
-  { value: 7, label: "7" },
-  { value: 8, label: "8" },
-  { value: 9, label: "9" },
-  { value: 10, label: "Strongly Agree" },
+  { value: 2, label: "Disagree" },
+  { value: 3, label: "Somewhat Disagree" },
+  { value: 4, label: "Neither Agree nor Disagree" },
+  { value: 5, label: "Somewhat Agree" },
+  { value: 6, label: "Agree" },
+  { value: 7, label: "Strongly Agree" },
 ];
 
 // ─── SCORING ────────────────────────────────────────────────
@@ -202,9 +199,9 @@ export function getPermaInterpretation(
   score: number
 ): { level: InterpretationLevel; text: string } {
   let level: InterpretationLevel;
-  if (score >= 8.0) level = "Strong";
-  else if (score >= 6.0) level = "Moderate";
-  else if (score >= 4.0) level = "Developing";
+  if (score >= 5.5) level = "Strong";
+  else if (score >= 4.0) level = "Moderate";
+  else if (score >= 2.5) level = "Developing";
   else level = "Low";
 
   const text = SUBSCALE_DESCRIPTIONS[subscaleKey]?.[level] || "";

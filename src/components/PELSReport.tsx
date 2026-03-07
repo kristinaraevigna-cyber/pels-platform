@@ -496,7 +496,7 @@ export default function PELSReport({
               {permaScore.totalMean.toFixed(1)}
             </Text>
             <View>
-              <Text style={{ fontSize: 10, color: "#8B6F5E99" }}>/ 10</Text>
+              <Text style={{ fontSize: 10, color: "#8B6F5E99" }}>/ 7</Text>
               <Text style={{ fontSize: 10, color: "#555", marginTop: 2 }}>Overall Well-Being Mean</Text>
             </View>
           </View>
@@ -521,7 +521,7 @@ export default function PELSReport({
                       height: 8,
                       borderRadius: 4,
                       backgroundColor: sub.color,
-                      width: `${(subScore / 10) * 100}%`,
+                      width: `${(subScore / 7) * 100}%`,
                     }}
                   />
                 </View>
@@ -536,7 +536,7 @@ export default function PELSReport({
               <View style={styles.miniCard}>
                 <Text style={styles.attributeTag}>{permaScore.highest.label}</Text>
                 <Text style={{ fontSize: 16, color: "#22C55E", fontFamily: "Helvetica-Bold", marginBottom: 4 }}>
-                  {permaScore.highest.score.toFixed(1)}<Text style={{ fontSize: 9, color: "#999" }}>/10</Text>
+                  {permaScore.highest.score.toFixed(1)}<Text style={{ fontSize: 9, color: "#999" }}>/7</Text>
                 </Text>
                 <Text style={[styles.bodyText, { fontSize: 8 }]}>
                   {getPermaInterpretation(permaScore.highest.key, permaScore.highest.score).text}
@@ -548,7 +548,7 @@ export default function PELSReport({
               <View style={styles.miniCard}>
                 <Text style={styles.attributeTag}>{permaScore.lowest.label}</Text>
                 <Text style={{ fontSize: 16, color: "#F59E0B", fontFamily: "Helvetica-Bold", marginBottom: 4 }}>
-                  {permaScore.lowest.score.toFixed(1)}<Text style={{ fontSize: 9, color: "#999" }}>/10</Text>
+                  {permaScore.lowest.score.toFixed(1)}<Text style={{ fontSize: 9, color: "#999" }}>/7</Text>
                 </Text>
                 <Text style={[styles.bodyText, { fontSize: 8 }]}>
                   {getPermaInterpretation(permaScore.lowest.key, permaScore.lowest.score).text}

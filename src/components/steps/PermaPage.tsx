@@ -66,7 +66,7 @@ export default function PermaPage({
           className="text-stone-400 text-sm mb-6"
           style={{ fontFamily: "sans-serif", fontWeight: 300 }}
         >
-          Rate each statement on a scale of 1 (Strongly Disagree) to 10 (Strongly Agree).
+          Rate each statement on a scale of 1 (Strongly Disagree) to 7 (Strongly Agree).
         </p>
         <div
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-stone-100 text-stone-600 text-sm"
@@ -98,12 +98,12 @@ export default function PermaPage({
           style={{ fontFamily: "sans-serif" }}
         >
           <span>1 = Strongly Disagree</span>
-          <span>5–6 = Neutral</span>
-          <span>10 = Strongly Agree</span>
+          <span>4 = Neutral</span>
+          <span>7 = Strongly Agree</span>
         </div>
         <div className="flex justify-between mt-1.5">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((v) => (
-            <div key={v} className="w-6 h-1 rounded-full bg-stone-200" />
+          {[1, 2, 3, 4, 5, 6, 7].map((v) => (
+            <div key={v} className="w-8 h-1 rounded-full bg-stone-200" />
           ))}
         </div>
       </div>
@@ -169,10 +169,10 @@ export default function PermaPage({
                         </p>
                       </div>
 
-                      {/* 1–10 Likert buttons */}
+                      {/* 1–7 Likert buttons */}
                       <div className="ml-10">
-                        <div className="grid grid-cols-10 gap-1.5">
-                          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
+                        <div className="grid grid-cols-7 gap-1.5">
+                          {[1, 2, 3, 4, 5, 6, 7].map((value) => (
                             <button
                               key={value}
                               onClick={() => setResponse(item.id, value)}

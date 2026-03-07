@@ -39,22 +39,12 @@ export default function ResultsPage({ data, assessmentId }: ResultsPageProps) {
   const hasPerma = Object.keys(permaResponses).length === 29;
   const permaScore = hasPerma ? scorePerma(permaResponses) : null;
 
-  // Build radar data from subdomain means
-  const relationalItems = PELS_ITEMS.filter((i) => i.subdomain === "Relational Energy");
-  const virtuousItems = PELS_ITEMS.filter((i) => i.subdomain === "Virtuous Behavior");
-
-  const radarData = [
-    ...relationalItems.map((item) => ({
-      attribute: item.attribute,
-      score: responses[item.id] || 0,
-      fullMark: 7,
-    })),
-    ...virtuousItems.map((item) => ({
-      attribute: item.attribute,
-      score: responses[item.id] || 0,
-      fullMark: 7,
-    })),
-  ];
+  // Build radar data from all 18 PELS items
+  const radarData = PELS_ITEMS.map((item) => ({
+    attribute: item.attribute,
+    score: responses[item.id] || 0,
+    fullMark: 7,
+  }));
 
   // Top 3 strengths and 3 growth areas
   const itemScores = PELS_ITEMS.map((item) => ({
@@ -291,9 +281,9 @@ export default function ResultsPage({ data, assessmentId }: ResultsPageProps) {
                     interval={0}
                   />
                   <YAxis
-                    domain={[0, 10]}
+                    domain={[0, 7]}
                     tick={{ fontSize: 11, fontFamily: "sans-serif", fill: "#6B7280" }}
-                    tickCount={6}
+                    tickCount={8}
                   />
                   <Tooltip
                     contentStyle={{
@@ -302,7 +292,7 @@ export default function ResultsPage({ data, assessmentId }: ResultsPageProps) {
                       borderRadius: 12,
                       border: "1px solid #E5E7EB",
                     }}
-                    formatter={(value: number) => [`${value} / 10`, "Score"]}
+                    formatter={(value: number) => [`${value} / 7`, "Score"]}
                   />
                   <Bar dataKey="score" radius={[6, 6, 0, 0]} barSize={36}>
                     {PERMA_SUBSCALES.map((sub) => (
@@ -319,7 +309,7 @@ export default function ResultsPage({ data, assessmentId }: ResultsPageProps) {
               <span className="text-lg font-semibold text-[#8B6F5E]">
                 {permaScore.totalMean.toFixed(1)}
               </span>
-              <span className="text-stone-400 text-sm"> / 10</span>
+              <span className="text-stone-400 text-sm"> / 7</span>
             </div>
           </div>
 
@@ -395,7 +385,7 @@ export default function ResultsPage({ data, assessmentId }: ResultsPageProps) {
                       <div
                         className="h-full rounded-full transition-all duration-500"
                         style={{
-                          width: `${(subScore / 10) * 100}%`,
+                          width: `${(subScore / 7) * 100}%`,
                           backgroundColor: sub.color,
                         }}
                       />
