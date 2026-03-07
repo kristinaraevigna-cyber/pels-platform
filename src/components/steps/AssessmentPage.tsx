@@ -106,14 +106,10 @@ export default function AssessmentPage({
         record.perma_overall_mean = permaScore.totalMean;
       }
 
-      console.log("[PELS Submit] Record keys:", Object.keys(record));
-      console.log("[PELS Submit] Inserting into Supabase...");
+      console.log("[PELS Submit] Record keys (" + Object.keys(record).length + "):", Object.keys(record));
 
       const supabase = createClient();
-
-      // Check if user is authenticated
-      const { data: { user }, error: authError } = await supabase.auth.getUser();
-      console.log("[PELS Submit] Auth check — user:", user?.id || "none", "error:", authError?.message || "none");
+      console.log("[PELS Submit] Supabase client created, inserting...");
 
       const { data: inserted, error: dbError } = await supabase
         .from("assessments")
@@ -124,6 +120,7 @@ export default function AssessmentPage({
       console.log("[PELS Submit] Insert result — data:", inserted, "error:", dbError);
 
       if (dbError) {
+        console.error("[PELS Submit] INSERT FAILED:", dbError.message, dbError.details, dbError.hint);
         throw new Error(dbError.message || JSON.stringify(dbError));
       }
 
