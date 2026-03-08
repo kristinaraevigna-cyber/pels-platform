@@ -37,7 +37,6 @@ export default function SignupPage() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [promoCode, setPromoCode] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -75,28 +74,8 @@ export default function SignupPage() {
       return;
     }
 
-    // If promo code was entered, validate it
-    if (promoCode.trim()) {
-      const res = await fetch("/api/access-codes/validate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code: promoCode.trim() }),
-      });
-
-      if (res.ok) {
-        router.push("/assessment");
-        router.refresh();
-        return;
-      }
-
-      const data = await res.json();
-      setError(data.error || "Invalid promo code. You can still pay to access.");
-      setLoading(false);
-      return;
-    }
-
-    // No promo code — redirect to access code page
-    router.push("/access-code");
+    // Free access — go directly to assessment
+    router.push("/assessment");
     router.refresh();
   }
 
@@ -219,36 +198,6 @@ export default function SignupPage() {
             onFocus={(e) => (e.currentTarget.style.borderColor = "#C4956A")}
             onBlur={(e) => (e.currentTarget.style.borderColor = "#E8E0D8")}
           />
-        </div>
-
-        <div style={{ marginBottom: "24px" }}>
-          <label style={labelStyle}>
-            Access Code{" "}
-            <span style={{ fontWeight: 400, textTransform: "none", letterSpacing: "normal", color: "#BBB" }}>
-              (optional)
-            </span>
-          </label>
-          <input
-            type="text"
-            value={promoCode}
-            onChange={(e) => setPromoCode(e.target.value)}
-            placeholder="e.g. PELS-XXXX"
-            style={inputStyle}
-            onFocus={(e) => (e.currentTarget.style.borderColor = "#C4956A")}
-            onBlur={(e) => (e.currentTarget.style.borderColor = "#E8E0D8")}
-          />
-          <p
-            style={{
-              fontFamily: sans,
-              fontSize: "12px",
-              fontWeight: 300,
-              color: "#AAA",
-              marginTop: "6px",
-              lineHeight: 1.5,
-            }}
-          >
-            Have an academic access code? Enter it here for complimentary access.
-          </p>
         </div>
 
         {error && (

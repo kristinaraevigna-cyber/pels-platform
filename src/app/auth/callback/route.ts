@@ -36,18 +36,8 @@ export async function GET(request: NextRequest) {
     }
 
     if (data.user) {
-      // Check if user has paid
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("has_paid, has_promo_access")
-        .eq("id", data.user.id)
-        .single();
-
-      if (profile?.has_paid || profile?.has_promo_access) {
-        return NextResponse.redirect(new URL("/assessment", SITE_URL));
-      } else {
-        return NextResponse.redirect(new URL("/access-code", SITE_URL));
-      }
+      // Free access — all authenticated users go directly to assessment
+      return NextResponse.redirect(new URL("/assessment", SITE_URL));
     }
   }
 

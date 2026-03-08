@@ -43,8 +43,8 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL(`/login?redirectTo=${pathname}`, SITE_URL));
   }
 
-  // If logged-in user visits /login or /signup, redirect to /assessment
-  if (user && (pathname === "/login" || pathname === "/signup")) {
+  // If logged-in user visits /login, /signup, /access-code, or /payment, redirect to /assessment
+  if (user && (pathname === "/login" || pathname === "/signup" || pathname === "/access-code" || pathname === "/payment")) {
     return NextResponse.redirect(new URL("/assessment", SITE_URL));
   }
 

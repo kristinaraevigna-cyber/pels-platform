@@ -15,16 +15,6 @@ export default async function AssessmentLayout({
     redirect("/login?redirectTo=/assessment");
   }
 
-  // Check if user has paid
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("has_paid")
-    .eq("id", user.id)
-    .single();
-
-  if (!profile?.has_paid) {
-    redirect("/payment");
-  }
-
+  // Free access — any authenticated user can take the assessment
   return <>{children}</>;
 }

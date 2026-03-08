@@ -162,7 +162,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
                 marginTop: "16px",
               }}
             >
-              Confidential &middot; 15 minutes &middot; Immediate personalized report
+              Free Research Access &middot; 15 minutes &middot; Immediate personalized report
             </p>
           </div>
 
