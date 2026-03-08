@@ -10,6 +10,16 @@ import {
 } from "@/lib/pels-data";
 import StepWrapper from "@/components/StepWrapper";
 
+const EDUCATION_OPTIONS = [
+  "High School / Secondary School",
+  "Some College / University",
+  "Bachelor's Degree",
+  "Master's Degree",
+  "Doctoral Degree (PhD, EdD, etc.)",
+  "Professional Degree (MD, JD, MBA, etc.)",
+  "Other",
+];
+
 interface IntakePageProps {
   data: AssessmentData;
   onUpdate: (d: Partial<AssessmentData>) => void;
@@ -106,6 +116,49 @@ export default function IntakePage({ data, onUpdate, onNext }: IntakePageProps) 
                 options={ORG_LEVEL_OPTIONS}
                 placeholder="Select..."
                 error={errors.org_level}
+              />
+            </Field>
+          </div>
+
+          <div className="grid sm:grid-cols-3 gap-4 mt-4">
+            <Field label="Age" hint="Optional">
+              <input
+                type="number"
+                min={16}
+                max={120}
+                value={data.respondent_age ?? ""}
+                onChange={(e) => onUpdate({ respondent_age: e.target.value ? Number(e.target.value) : undefined })}
+                className={inputClass()}
+                placeholder="e.g. 34"
+              />
+            </Field>
+            <Field label="Nationality" hint="Optional">
+              <input
+                type="text"
+                value={data.respondent_nationality || ""}
+                onChange={(e) => onUpdate({ respondent_nationality: e.target.value })}
+                className={inputClass()}
+                placeholder="e.g. Italian, American"
+              />
+            </Field>
+            <Field label="Native Language" hint="Optional">
+              <input
+                type="text"
+                value={data.respondent_native_language || ""}
+                onChange={(e) => onUpdate({ respondent_native_language: e.target.value })}
+                className={inputClass()}
+                placeholder="e.g. English, Italian"
+              />
+            </Field>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-4 mt-4">
+            <Field label="Highest Level of Education" hint="Optional">
+              <SelectField
+                value={data.respondent_education || ""}
+                onChange={(v) => onUpdate({ respondent_education: v })}
+                options={EDUCATION_OPTIONS}
+                placeholder="Select..."
               />
             </Field>
           </div>

@@ -8,6 +8,10 @@ export type AssessmentData = {
   respondent_gender?: string;
   respondent_race?: string;
   respondent_org_level?: string;
+  respondent_age?: number;
+  respondent_nationality?: string;
+  respondent_native_language?: string;
+  respondent_education?: string;
   leader_gender?: string;
   leader_tenure?: string;
   // Stories
