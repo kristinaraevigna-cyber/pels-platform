@@ -303,15 +303,6 @@ export default function ContactPage() {
         {/* Below-form info */}
         {!submitted && (
           <div style={{ maxWidth: 560, margin: "32px auto 0", textAlign: "center" }}>
-            <p style={{ fontFamily: sans, fontSize: 15, color: "#666", marginBottom: 8 }}>
-              Or email us directly at{" "}
-              <a
-                href="mailto:contact@pels-assessment.com"
-                style={{ color: "#C4956A", textDecoration: "none", fontWeight: 600 }}
-              >
-                contact@pels-assessment.com
-              </a>
-            </p>
             <p style={{ fontFamily: sans, fontSize: 13, color: "#999", margin: 0 }}>
               We typically respond within 2 business days.
             </p>
