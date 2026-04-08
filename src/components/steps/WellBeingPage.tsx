@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import type { AssessmentData } from "@/lib/types";
 import { WELLBEING_QUESTIONS } from "@/lib/pels-data";
 import StepWrapper from "@/components/StepWrapper";
@@ -12,11 +13,25 @@ interface WellBeingPageProps {
 }
 
 export default function WellBeingPage({ data, onUpdate, onNext, onBack }: WellBeingPageProps) {
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validate = () => {
+    const e: Record<string, string> = {};
+    WELLBEING_QUESTIONS.forEach((q) => {
+      const answer = (data[q.id as keyof AssessmentData] as string)?.trim();
+      if (!answer || answer.split(/\s+/).length < 5) {
+        e[q.id] = "Please provide a response — at least a few words";
+      }
+    });
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
+
   return (
     <StepWrapper
       title="Your Well-Being at Work"
       subtitle="These three open-ended questions explore how your leader specifically supports — or could better support — your well-being. Take your time."
-      onNext={onNext}
+      onNext={() => validate() && onNext()}
       onBack={onBack}
     >
       <div className="space-y-10">
@@ -46,18 +61,28 @@ export default function WellBeingPage({ data, onUpdate, onNext, onBack }: WellBe
                   }
                   rows={5}
                   placeholder={q.placeholder}
-                  className="w-full rounded-xl border border-stone-200 hover:border-stone-300 px-5 py-4
+                  className={`w-full rounded-xl border px-5 py-4
                     text-stone-800 text-sm bg-white resize-none leading-relaxed
                     focus:outline-none focus:ring-2 focus:ring-[#C4956A]/40 focus:border-[#C4956A]
-                    placeholder:text-stone-300 transition-all duration-200"
+                    placeholder:text-stone-300 transition-all duration-200
+                    ${errors[q.id] ? "border-rose-300" : "border-stone-200 hover:border-stone-300"}`}
                   style={{ fontFamily: "sans-serif" }}
                 />
-                <p
-                  className={`text-xs mt-1 text-right ${wordCount > 5 ? "text-[#8B6F5E]" : "text-stone-400"}`}
-                  style={{ fontFamily: "sans-serif" }}
-                >
-                  {wordCount > 0 ? `${wordCount} words` : "Optional, but encouraged"}
-                </p>
+                <div className="flex justify-between items-center mt-1">
+                  {errors[q.id] ? (
+                    <p className="text-xs text-rose-600" style={{ fontFamily: "sans-serif" }}>
+                      {errors[q.id]}
+                    </p>
+                  ) : (
+                    <span className="text-xs text-[#C4956A]" style={{ fontFamily: "sans-serif" }}>Required</span>
+                  )}
+                  <p
+                    className={`text-xs ${wordCount > 5 ? "text-[#8B6F5E]" : "text-stone-400"}`}
+                    style={{ fontFamily: "sans-serif" }}
+                  >
+                    {wordCount} words
+                  </p>
+                </div>
               </div>
             </div>
           );
